@@ -1,0 +1,27 @@
+.blog-sidebar {
+  div, div a {
+    color: #fff;
+  }
+
+  div a {
+    font-weight: bold;
+    position: relative;
+    bottom: -10px;
+  }
+}
+
+.blog-footer {
+  color: #999;
+  text-align: center;
+  background-color: #f9f9f9;
+  border-top: .05rem solid #e5e5e5;
+
+  p:last-child {
+    margin-bottom: 0;
+  }
+
+  textarea {
+    resize: none;
+    height: 200px;
+  }
+}

@@ -1,0 +1,11 @@
+{
+    "name": "centrocastelo",
+    "type": "project",
+    "require": {
+        "phpmailer/phpmailer": "^6.0"
+    },
+    "authors": [{
+        "name": "Henrique Uzeda",
+        "email": "hruzeda@gmail.com"
+    }]
+}

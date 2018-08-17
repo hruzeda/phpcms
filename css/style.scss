@@ -1,0 +1,32 @@
+// Custom.scss
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,700');
+
+$font-family-sans-serif: "Open Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol" !default;
+
+$theme-colors: (
+  "primary": #feb614,
+  "secondary": #9e9fa3,
+  "info": #0065b3
+);
+
+@import "../node_modules/bootstrap/scss/bootstrap";
+
+$fa-font-path: "../node_modules/@fortawesome/fontawesome-free-webfonts/webfonts" !default;
+
+@import "../node_modules/@fortawesome/fontawesome-free-webfonts/scss/fa-solid";
+@import "../node_modules/@fortawesome/fontawesome-free-webfonts/scss/fontawesome";
+
+@import "../node_modules/slick-carousel/slick/slick";
+@import "../node_modules/slick-carousel/slick/slick-theme";
+
+@import "../node_modules/katex/dist/katex.min.css";
+@import "../node_modules/highlight.js/styles/monokai-sublime.css";
+//@import "../node_modules/quill/dist/quill.bubble.css";
+@import "../node_modules/quill/dist/quill.snow.css";
+
+@import "../inc/top";
+@import "../inc/admin/login";
+@import "../inc/admin/index";
+@import "../inc/foot";
+@import "../index";
+@import "../noticia";

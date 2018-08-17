@@ -1,0 +1,49 @@
+#cover {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  background: #1b1e21;
+  left: 0;
+  top: 0;
+  opacity: .3;
+  z-index: 100;
+}
+
+#menu-admin {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.btn-admin {
+  position: absolute;
+  z-index: 102;
+  top: 0;
+  right: 0;
+}
+
+.carousel-item .btn-admin {
+  left: 50%;
+}
+
+.btn-admin:nth-of-type(2) {
+  transform: translateX(-120%);
+}
+
+#generic-modal {
+  input[type='file'] {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  textarea {
+    height: 600px;
+  }
+
+  img {
+    display: block;
+    width: 30%;
+    margin: 10px auto;
+  }
+}
