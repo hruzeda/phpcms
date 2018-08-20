@@ -239,6 +239,6 @@ class Post
      */
     public function getLastUpdate()
     {
-        return ucwords(strftime('%A, %e de %B de %Y', strtotime($this->lastUpdate)));
+        return ucwords(utf8_encode(strftime('%A, %e de %B de %Y', strtotime($this->lastUpdate))));
     }
 }

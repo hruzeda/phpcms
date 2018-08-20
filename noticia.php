@@ -20,7 +20,6 @@ if (!isset($_GET['id'])) {
 require_once 'const.php';
 require_once ROOT . 'vendor/autoload.php';
 require_once ROOT . "php/App.php";
-require_once ROOT . "php/Banner.php";
 require_once ROOT . "php/Post.php";
 require_once ROOT . "php/DynamicBlock.php";
 require_once ROOT . 'inc/top.php'; ?>
