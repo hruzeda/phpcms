@@ -24,9 +24,9 @@
     <?php } ?>
       <div class="modal-header">
         <h5 class="modal-title" id="login-modal-label">Login</h5>
-        <button class="close" data-dismiss="modal" aria-label="Close">
+        <a class="btn close" data-dismiss="modal">
           <span class="fas fa-times-circle"></span>
-        </button>
+        </a>
       </div>
       <div class="modal-body">
         <?php if (LOGGED_USER == null) { ?>
@@ -42,7 +42,7 @@
       <div class="modal-footer">
         <?php if (LOGGED_USER == null) { ?>
           <input type="submit" class="btn btn-primary" value="Login" />
-          <button class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+          <input type="button" class="btn btn-secondary" data-dismiss="modal" value="Cancel" />
         <?php } else { ?>
           <input type="submit" class="btn btn-primary" value="Trocar senha" />
           <a href="<?php ROOT; ?>logout.php" class="btn btn-dark">Logout</a>

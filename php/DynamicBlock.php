@@ -105,18 +105,29 @@ class DynamicBlock
     }
 
     /**
-     * @return string
-     */
-    public function getHTMLContent()
-    {
-        return html_entity_decode($this->content);
-    }
-
-    /**
      * @param string $content
      */
     public function setContent($content)
     {
         $this->content = $content;
+    }
+
+    /**
+     * @return string
+     */
+    public function getHTMLContent()
+    {
+        $aux = preg_replace("/<p[^>]*?>/", "", html_entity_decode($this->content));
+        return str_replace("</p>", "<br />", $aux);
+    }
+
+    /**
+     * @return string
+     */
+    public function getTextContent()
+    {
+        $aux = preg_replace("/<p[^>]*?>/", "", html_entity_decode($this->content));
+        $aux = str_replace("</p>", " ", $aux);
+        return strip_tags($aux);
     }
 }

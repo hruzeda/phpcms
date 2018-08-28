@@ -56,6 +56,17 @@ class App
     }
 
     /**
+     * @param $form
+     * @return string
+     */
+    public static function generateToken($form)
+    {
+        $token = md5(uniqid(microtime(), true));
+        $_SESSION[$form . '_token'] = $token;
+        return $token;
+    }
+
+    /**
      * @param $attributes of the entity
      */
     public static function populateForm($attributes)

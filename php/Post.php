@@ -213,17 +213,17 @@ class Post
     /**
      * @return string
      */
-    public function getContent()
+    public function getHTMLContent()
     {
-        return $this->content;
+        return html_entity_decode($this->content);
     }
 
     /**
      * @return string
      */
-    public function getHTMLContent()
+    public function getContent()
     {
-        return html_entity_decode($this->content);
+        return $this->content;
     }
 
     /**

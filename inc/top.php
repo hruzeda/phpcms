@@ -91,8 +91,8 @@
   <div class="nav-scroller py-1 mb-2">
     <nav class="nav d-flex">
       <a class="py-2 px-3 mx-1 active" href="index.php">Início</a>
-      <a class="py-2 px-3 mx-1" href="#">O Centro</a>
-      <a class="py-2 px-3 mx-1" href="#">Residência</a>
+      <!--<a class="py-2 px-3 mx-1" href="#">O Centro</a>
+      <a class="py-2 px-3 mx-1" href="#">Residência</a>-->
     </nav>
   </div>
 </div>
