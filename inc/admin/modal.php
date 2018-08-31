@@ -7,7 +7,7 @@
  * @package  None
  * @author   hruzeda <hruzeda@gmail.com>
  * @license  http://www.gnu.org/copyleft/gpl.html GNU General Public License
- * @link     http://nolinkyet.com.br
+ * @link     http://centrocastelo.org.br
  */ ?>
 <div class="modal fade" id="generic-modal" tabindex="-1" role="dialog"
      aria-labelledby="generic-modal-label" aria-hidden="true">

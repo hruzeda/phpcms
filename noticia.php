@@ -7,7 +7,7 @@
  * @package  None
  * @author   hruzeda <hruzeda@gmail.com>
  * @license  http://www.gnu.org/copyleft/gpl.html GNU General Public License
- * @link     http://nolinkyet.com.br
+ * @link     http://centrocastelo.org.br
  */
 session_start();
 
@@ -38,7 +38,6 @@ require_once ROOT . 'inc/top.php'; ?>
         <p class="small font-italic text-muted"><?= $post->getLastUpdate(); ?></p>
         <p class="text-center"><img width="100%" src="<?= $post->getImage(); ?>"/></p>
         <p class="blog-post-body"><?= $post->getHTMLContent(); ?></p>
-
       </div>
 
       <div class="fb-comments"

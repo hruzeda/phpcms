@@ -7,7 +7,7 @@
  * @package  None
  * @author   hruzeda <hruzeda@gmail.com>
  * @license  http://www.gnu.org/copyleft/gpl.html GNU General Public License
- * @link     http://nolinkyet.com.br
+ * @link     http://centrocastelo.org.br
  */ ?>
 <button id="btn-show-login" type="button" class="btn btn-dark" data-toggle="modal"
   data-target="#login-modal">

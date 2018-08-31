@@ -7,7 +7,7 @@
  * @package  None
  * @author   hruzeda <hruzeda@gmail.com>
  * @license  http://www.gnu.org/copyleft/gpl.html GNU General Public License
- * @link     http://nolinkyet.com.br
+ * @link     http://centrocastelo.org.br
  */ ?>
 <!DOCTYPE html>
 <html>

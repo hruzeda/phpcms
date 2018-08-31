@@ -1,7 +1,7 @@
 <?php
 /**
  * PHP Version 7.2.6
- * Post class
+ * Page class
  *
  * @category Class
  * @package  app
@@ -11,7 +11,7 @@
  */
 namespace app;
 
-class Post
+class Page
 {
     private $id;
     private $image;
@@ -21,7 +21,7 @@ class Post
     private $lastUpdate;
 
     /**
-     * Post constructor.
+     * Page constructor.
      * @param $image
      * @param $thumb
      * @param $title
@@ -40,19 +40,19 @@ class Post
     /**
      * @param $mysql
      * @param $id
-     * @return Post|null
+     * @return Page|null
      */
     public static function load($mysql, $id)
     {
-        $result = $mysql->query("SELECT image, thumb, title, content, last_update FROM post WHERE id = {$id} LIMIT 1");
+        $result = $mysql->query("SELECT image, thumb, title, content, last_update FROM page WHERE id = {$id} LIMIT 1");
         if ($result->num_rows === 1) {
             $result->data_seek(0);
             $result = $result->fetch_assoc();
 
-            $post = new Post($result['image'], $result['thumb'], $result['title'], $result['content']);
-            $post->id = $id;
-            $post->lastUpdate = $result['last_update'];
-            return $post;
+            $page = new Page($result['image'], $result['thumb'], $result['title'], $result['content']);
+            $page->id = $id;
+            $page->lastUpdate = $result['last_update'];
+            return $page;
         } else {
             return null;
         }
@@ -70,15 +70,15 @@ class Post
         $page *= $pageSize;
         $list = array();
 
-        $result = $mysql->query("SELECT id, image, thumb, title, content, last_update FROM post " .
+        $result = $mysql->query("SELECT id, image, thumb, title, content, last_update FROM page " .
             "ORDER BY {$order} LIMIT {$page}, {$pageSize}");
         if ($result->num_rows > 0) {
             $result->data_seek(0);
             while ($pResult = $result->fetch_assoc()) {
-                $post = new Post($pResult['image'], $pResult['thumb'], $pResult['title'], $pResult['content']);
-                $post->id = $pResult['id'];
-                $post->lastUpdate = $pResult['last_update'];
-                array_push($list, $post);
+                $page = new Page($pResult['image'], $pResult['thumb'], $pResult['title'], $pResult['content']);
+                $page->id = $pResult['id'];
+                $page->lastUpdate = $pResult['last_update'];
+                array_push($list, $page);
             }
         }
 
@@ -114,10 +114,10 @@ class Post
 
         if ($status === true) {
             if ($this->id > 0) {
-                $status = $mysql->query("UPDATE post SET image = '{$this->image}', thumb = '{$this->thumb}', " .
+                $status = $mysql->query("UPDATE page SET image = '{$this->image}', thumb = '{$this->thumb}', " .
                     "title = '{$this->title}', content = '{$this->content}' WHERE id = {$this->id}");
             } else {
-                $status = $mysql->query("INSERT INTO post (image, thumb, title, content) VALUES (" .
+                $status = $mysql->query("INSERT INTO page (image, thumb, title, content) VALUES (" .
                     "'{$this->image}', '{$this->thumb}', '{$this->title}', '{$this->content}')");
                 $this->id = $mysql->insert_id;
             }
@@ -137,7 +137,7 @@ class Post
     public function delete($mysql)
     {
         $status = true;
-        $status = $mysql->query("DELETE FROM post WHERE id = {$this->getId()}");
+        $status = $mysql->query("DELETE FROM page WHERE id = {$this->getId()}");
         if ($status !== true) {
             $status = $mysql->error;
         }

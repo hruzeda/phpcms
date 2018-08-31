@@ -1,5 +1,6 @@
 /* eslint-env browser, jquery */
 $(() => {
+  // SLICK CARROUSEL
   $('#banner').slick({
     autoplay: true,
     autoplaySpeed: 3000,
@@ -11,10 +12,12 @@ $(() => {
     adaptiveHeight: true,
   });
 
+  // HIGHTLIGHT-JS
   hljs.configure({
     useBR: false
   });
 
+  // CLAMP-JS
   $('.blog-post-body').each((index, element) => {
     $clamp(element, {clamp: 9});
   });

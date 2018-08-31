@@ -7,7 +7,7 @@
  * @package  None
  * @author   hruzeda <hruzeda@gmail.com>
  * @license  http://www.gnu.org/copyleft/gpl.html GNU General Public License
- * @link     http://nolinkyet.com.br
+ * @link     http://centrocastelo.org.br
  */ ?>
 
 <aside class="col-md-4 blog-sidebar">
@@ -52,13 +52,14 @@
       <p class="dynamic-block"
          data-id="<?= $dynamicBlock->getId(); ?>"
          data-content="<?= $dynamicBlock->getContent(); ?>">
-          <?= $dynamicBlock->getHTMLContent(); ?>
+            <?= $dynamicBlock->getHTMLContent(); ?>
         Fone: <a href="tel:+551932432164">+55 19 3243-2164</a>
       </p>
 
       <div id="mapView"></div>
       <script type="text/javascript">
         $(() => {
+          // HERE-JS (MAPS)
           let platform = new H.service.Platform({
             app_id: 'Bp4vZ7fRoslHTcMCmYq9',
             app_code: 'qSkHpzYFytDS6-V-R21-DQ'
@@ -91,6 +92,7 @@
         });
       </script>
     </div>
+
     <div class="col-md-4 col-sm-12 my-5 px-4">
       <h4>Facebook</h4>
       <div class="fb-page" data-href="https://www.facebook.com/centrocastelo.org.br/"
@@ -101,7 +103,7 @@
     <div class="col-md-4 col-sm-12 my-5 px-4">
       <h4>Fale Conosco</h4>
 
-      <?php $token = app\App::generateToken('contato'); ?>
+        <?php $token = app\App::generateToken('contato'); ?>
       <form method="post" action="mail.php">
         <input type="hidden" name="token" value="<?= $token; ?>" />
 
