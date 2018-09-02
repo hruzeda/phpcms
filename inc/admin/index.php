@@ -13,89 +13,14 @@
 
 <div id="menu-admin" class="nav-scroller py-1 mb-2">
   <nav class="nav d-flex">
-    <button id="btnBanner" class="btn btn-primary shadow mr-2">Novo Banner</button>
-    <button id="btnPost" class="btn btn-primary shadow">Novo Post</button>
+    <button id="btnBanner" class="btn btn-primary mr-2">Novo Banner</button>
+    <button id="btnPost" class="btn btn-primary mr-2">Novo Post</button>
+    <button id="btnPage" class="btn btn-primary">Nova Página</button>
   </nav>
 </div>
 
+<script type="text/javascript" src="js/init.admin.js"></script>
 <script type="text/javascript">
-  this.addNumberInput = function addNumberInput(form, name, placeholder, required) {
-    let div = $('<div class="form-group"></div>');
-    let field = $('<input type="number" min="1" max="99" class="form-control" />');
-    $(field).attr('id', name);
-    $(field).attr('placeholder', placeholder);
-    $(field).attr('name', name);
-    if (required) {
-      $(field).attr('required', 'required');
-    }
-    $(div).append(field);
-    $(form).append(div);
-  };
-
-  this.addTextInput = function addTextInput(form, name, placeholder, required) {
-    let div = $('<div class="form-group"></div>');
-    let field = $('<input type="text" class="form-control" />');
-    $(field).attr('id', name);
-    $(field).attr('placeholder', placeholder);
-    $(field).attr('name', name);
-    if (required) {
-      $(field).attr('required', 'required');
-    }
-    $(div).append(field);
-    $(form).append(div);
-  };
-
-  this.addImageInput = function addImageInput(form, name, required) {
-    let div = $('<div class="form-group"></div>');
-    let field = $('<input type="file" accept="image/*" class="form-control" />');
-    $(field).attr('id', name);
-    $(field).addClass('form-control');
-    $(field).attr('name', name);
-    if (required) {
-      $(field).attr('required', 'required');
-    }
-    $(div).append(field);
-    $(form).append(div);
-  };
-
-  this.addTextArea = function addTextArea(form, name) {
-    let div = $('<div class="form-group"></div>');
-    let quill = $('<div id="quill-editor"></div>');
-    $(div).data('name', name);
-
-    let field = $('<textarea class="d-none"></textarea>');
-    $(field).attr('name', name);
-
-    $(div).append(quill);
-    $(form).append(div);
-    $(form).append(field);
-  };
-
-  this.addHiddenInput = function addHiddenInput(form, name, value) {
-    let field = $('<input type="hidden" />');
-    $(field).attr('name', name).val(value);
-    $(form).append(field);
-  };
-
-  this.addSubmitInput = function addSubmitInput(form) {
-    let footer = $('<div class="modal-footer"></div>');
-    let submit = $('<input type="submit" class="btn btn-primary" value="Salvar" />');
-    let cancel = $('<button class="btn btn-secondary" data-dismiss="modal">Cancel</button>');
-
-    $(form).ajaxForm((data) => {
-      if (parseInt(data, 10) === 1) {
-        window.location.reload();
-      } else {
-        this.alert('Erro', data);
-      }
-    });
-
-    $(footer).append(submit);
-    $(footer).append(cancel);
-    $(form).append(footer);
-  };
-
-  // ready event handler
   $(() => {
     $('#btnBanner').on('click', (event) => {
       let form = $('<form action="save.php?entity=banner" method="post" enctype="multipart/form-data"></form>');
@@ -109,6 +34,13 @@
         <?php $attr = app\Post::getAttributeArray();
         app\App::populateForm($attr); ?>
       this.showModal('Novo Post', form);
+    });
+
+    $('#btnPage').on('click', (event) => {
+      let form = $('<form action="save.php?entity=page" method="post" enctype="multipart/form-data"></form>');
+        <?php $attr = app\Page::getAttributeArray();
+        app\App::populateForm($attr); ?>
+      this.showModal('Nova Página', form);
     });
 
     // DELETE BUTTON TEMPLATE
@@ -126,7 +58,7 @@
           if (parseInt(data, 10) === 1) {
             window.location.reload();
           } else {
-            this.alert('Erro', data);
+            this.alert('Erro', 'danger', data);
           }
         });
       }
@@ -157,7 +89,31 @@
     });
 
     // EXISTING POSTS
-    $('.blog-post').each((index, element) => {
+    $('.post').each((index, element) => {
+      let editClone = $(edit).clone();
+      let trashClone = $(trash).clone(true);
+
+      $(editClone).on('click', (event) => {
+        $('#generic-modal').bind('shown.bs.modal', (event) => {
+          $("#generic-modal-title").html("Editar post");
+          $('#generic-modal input[name="id"]').val($(element).data('id'));
+          let postImg = $('<img src="' + $(element).find('img').attr('src') + '" />');
+          $('#generic-modal input[name="image"]').before(postImg);
+          $('#generic-modal input[name="title"]').val($(element).data('title'));
+          $("#generic-modal .ql-editor").html($(element).data('content'));
+          $('#generic-modal textarea.d-none').val($(element).data('content'));
+        });
+
+        $('#btnPost').trigger('click');
+      });
+
+      $(element).css('background', '#ddd');
+      $(element).append(editClone);
+      $(element).append(trashClone);
+    });
+
+    // EXISTING PAGES
+    $('.page').each((index, element) => {
       let editClone = $(edit).clone();
       let trashClone = $(trash).clone(true);
 
@@ -186,8 +142,8 @@
 
       $(editClone).on('click', (event) => {
         let form = $('<form action="save.php?entity=dynamicBlock" method="post"></form>');
-          <?php $attr = app\DynamicBlock::getAttributeArray();
-          app\App::populateForm($attr); ?>
+            <?php $attr = app\DynamicBlock::getAttributeArray();
+            app\App::populateForm($attr); ?>
 
         $('#generic-modal').bind('shown.bs.modal', (event) => {
           $('#generic-modal input[name="id"]').val($(element).data('id'));

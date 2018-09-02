@@ -1,9 +1,9 @@
 <?php
 /**
  * PHP Version 7.2.6
- * Index page of the blog
+ * Main view of the blog
  *
- * @category Page
+ * @category View
  * @package  None
  * @author   hruzeda <hruzeda@gmail.com>
  * @license  http://www.gnu.org/copyleft/gpl.html GNU General Public License
@@ -15,13 +15,13 @@ require_once ROOT . 'vendor/autoload.php';
 require_once ROOT . "php/App.php";
 require_once ROOT . "php/Banner.php";
 require_once ROOT . "php/Post.php";
+require_once ROOT . "php/Page.php";
 require_once ROOT . "php/DynamicBlock.php";
 require_once ROOT . 'inc/top.php'; ?>
 
 <!-- ADD THE NEW BANNER PLUGIN -->
 <div id="banner">
-    <?php $mysql = app\App::getConnection();
-    $banners = app\Banner::loadAll($mysql, 'sequence ASC', 0, 5);
+    <?php $banners = app\Banner::loadAll($mysql, 'sequence ASC', 0, 5);
 
     $i = 0;
     foreach ($banners as $banner) { ?>
@@ -41,7 +41,7 @@ require_once ROOT . 'inc/top.php'; ?>
   <div class="col-md-8 blog-main">
     <?php $posts = app\Post::loadAll($mysql, 'last_update DESC', 0, 5);
     foreach ($posts as $post) { ?>
-      <div class="blog-post"
+      <div class="blog-post post"
         data-id="<?= $post->getId(); ?>"
         data-type="post"
         data-title="<?= $post->getTitle(); ?>"
@@ -51,7 +51,7 @@ require_once ROOT . 'inc/top.php'; ?>
           <p class="col-md-4 text-justify"><img width="100%" src="<?= $post->getThumb(); ?>"/></p>
           <div class="col">
             <p class="blog-post-body"><?= $post->getExcerpt(); ?></p>
-            <a href="noticia.php?id=<?= $post->getId(); ?>">Saiba mais</a>
+            <a href="post/<?= $post->getId(); ?>">Saiba mais</a>
           </div>
         </div>
       </div>

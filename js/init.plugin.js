@@ -12,6 +12,15 @@ $(() => {
     adaptiveHeight: true,
   });
 
+  // CONTACT FORM
+  $('#contactForm').ajaxForm((data) => {
+    if (data === 'Mensagem enviada com sucesso!') {
+      this.alert('Sucesso', 'success', data);
+    } else {
+      this.alert('Erro', 'danger', data);
+    }
+  });
+
   // HIGHTLIGHT-JS
   hljs.configure({
     useBR: false

@@ -29,7 +29,7 @@ if (LOGGED_USER === null) {
             $sequence = intval($_POST['sequence']);
 
             if ($id === 0 && $image === null) {
-                die("Image is required for new banner.");
+                die("Image is required for a new banner.");
             }
 
             if ($id > 0) {
@@ -68,7 +68,7 @@ if (LOGGED_USER === null) {
             $content = htmlentities($_POST['content'], ENT_QUOTES);
 
             if ($id === 0 && $image === null) {
-                die("Image is required for new post.");
+                die("Image is required for a new post.");
             }
 
             if ($id > 0) {
@@ -83,6 +83,32 @@ if (LOGGED_USER === null) {
             }
 
             die($post->save($mysql));
+            break;
+
+        case "page":
+            require_once ROOT . "php/Page.php";
+
+            $id = intval($_POST['id']);
+            $image = $_FILES ? $_FILES['image'] : null;
+            $title = app\App::secureString($_POST['title']);
+            $content = htmlentities($_POST['content'], ENT_QUOTES);
+
+            if ($id === 0 && $image === null) {
+                die("Image is required for a new page.");
+            }
+
+            if ($id > 0) {
+                $page = app\Page::load($mysql, $id);
+                if ($image !== null) {
+                    $page->setImage($image);
+                }
+                $page->setTitle($title);
+                $page->setContent($content);
+            } else {
+                $page = new app\Page($image, null, $title, $content);
+            }
+
+            die($page->save($mysql));
             break;
     }
 }

@@ -103,8 +103,8 @@
     <div class="col-md-4 col-sm-12 my-5 px-4">
       <h4>Fale Conosco</h4>
 
-        <?php $token = app\App::generateToken('contato'); ?>
-      <form method="post" action="mail.php">
+        <?php $token = app\App::generateToken('contact'); ?>
+      <form id="contactForm" method="post" action="mail.php">
         <input type="hidden" name="token" value="<?= $token; ?>" />
 
         <div class="form-group">

@@ -38,6 +38,12 @@ if (LOGGED_USER === null) {
             $post = app\Post::load($mysql, $id);
             die($post->delete($mysql));
             break;
+
+        case "page":
+            require_once ROOT . "php/Page.php";
+            $page = app\Page::load($mysql, $id);
+            die($page->delete($mysql));
+            break;
     }
 }
 

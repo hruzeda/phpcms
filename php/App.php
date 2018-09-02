@@ -48,7 +48,7 @@ class App
             return self::$connection;
         }
 
-        //self::$connection = new \mysqli("localhost", "root", "", "centrocastelo");
+        self::$connection = new \mysqli("localhost", "root", "", "centrocastelo");
         if (self::$connection->connect_error) {
             throw new \Exception("Unable to connect to database");
         }

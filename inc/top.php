@@ -36,6 +36,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <title>Centro Castelo</title>
+    <?php //<base href="http://localhost/centrocastelo/"> ?>
+  <base href="http://centrocastelo.org.br/">
 
   <link rel="stylesheet" type="text/css" href="css/style.css"/>
 
@@ -57,8 +59,8 @@
 <div class="container">
   <header class="blog-header py-3">
         <?php
-        require_once ROOT . 'inc/admin/alert.php';
-        require_once ROOT . 'inc/admin/modal.php';
+        require_once ROOT . 'inc/alert.php';
+        require_once ROOT . 'inc/modal.php';
         require_once ROOT . 'inc/admin/login.php';
 
         if (LOGGED_USER != null) {
@@ -91,8 +93,12 @@
   <div class="nav-scroller py-1 mb-2">
     <nav class="nav d-flex">
       <a class="py-2 px-3 mx-1 active" href="index.php">Início</a>
-      <!--<a class="py-2 px-3 mx-1" href="#">O Centro</a>
-      <a class="py-2 px-3 mx-1" href="#">Residência</a>-->
+
+        <?php $mysql = app\App::getConnection();
+        $pages = app\Page::loadAll($mysql, 'last_update DESC', 0, 20);
+        foreach ($pages as $page) { ?>
+      <a class="py-2 px-3 mx-1 active" href="page/<?= $page->getId(); ?>"><?= $page->getTitle(); ?></a>
+        <?php } ?>
     </nav>
   </div>
 </div>

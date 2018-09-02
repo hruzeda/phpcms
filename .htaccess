@@ -1,0 +1,27 @@
+<IfModule mod_rewrite.c>
+    #Bloquear listagem
+	Options -Indexes
+
+	Options +FollowSymLinks
+	RewriteEngine on
+
+	RewriteCond %{SERVER_PORT} 80
+	#RewriteRule ^(.*)$ http://localhost/centrocastelo/$1 [R,L]
+
+	DefaultLanguage pt-BR
+	AddDefaultCharset UTF-8
+
+	#redirect to https
+	#RewriteCond %{HTTPS} !on
+	#RewriteRule (.*) https://%{HTTP_HOST}%{REQUEST_URI}
+
+	RewriteCond %{SCRIPT_FILENAME} !-d
+	RewriteCond %{SCRIPT_FILENAME} !-f
+
+	#Errors
+	#ErrorDocument 404 views/errors/404/index.php
+
+	#PAGES**************************************************************
+	RewriteRule ^page/(.*)?$ page.php?id=$1 [L,QSA]
+  RewriteRule ^post/(.*)?$ post.php?id=$1 [L,QSA]
+</IfModule>

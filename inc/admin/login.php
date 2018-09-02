@@ -58,7 +58,7 @@
       if (parseInt(data, 10) === 1) {
         window.location.reload();
       } else {
-        this.alert('Falha na autenticação', 'A senha que você informou está incorreta');
+        this.alert('Falha na autenticação', 'danger', 'A senha que você informou está incorreta');
       }
     })
   });
