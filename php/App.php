@@ -48,7 +48,7 @@ class App
             return self::$connection;
         }
 
-        self::$connection = new \mysqli("localhost", "root", "", "centrocastelo");
+        self::$connection = new \mysqli("localhost", "", "", "");
         if (self::$connection->connect_error) {
             throw new \Exception("Unable to connect to database");
         }
@@ -82,6 +82,14 @@ class App
                 echo "this.addImageInput(form, '{$name}', {$props['required']});";
             } elseif ($props['type'] === "text") {
                 echo "this.addTextArea(form, '{$name}');";
+            } elseif ($props['type'] === "join") {
+                echo "this.addSelect(
+                    form,
+                    '{$name}',
+                    {$props['options']},
+                    '{$props['placeholder']}',
+                    {$props['required']}
+                );";
             }
         }
 

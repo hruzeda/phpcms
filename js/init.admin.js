@@ -28,7 +28,6 @@ this.addImageInput = function addImageInput(form, name, required) {
   const div = $('<div class="form-group"></div>');
   const field = $('<input type="file" accept="image/*" class="form-control" />');
   $(field).attr('id', name);
-  $(field).addClass('form-control');
   $(field).attr('name', name);
   if (required) {
     $(field).attr('required', 'required');
@@ -36,6 +35,29 @@ this.addImageInput = function addImageInput(form, name, required) {
   $(div).append(field);
   $(form).append(div);
 };
+
+this.addSelect = function addSelect(form, name, options, placeholder, required) {
+  const div = $('<div class="form-group"></div>');
+  const field = $('<select class="form-control"><option selected value>placeholder</option></select>');
+  $(field).attr('id', name);
+  $(field).attr('name', name);
+
+  if (required) {
+    $(field).attr('required', 'required');
+  }
+
+  $(field).children('option').html(placeholder);
+
+  $.each(options, function(index, page) {
+    option = $("<option></option>");
+    $(option).attr('value', page.id);
+    $(option).html(page.title);
+    $(field).append(option);
+  });
+
+  $(div).append(field);
+  $(form).append(div);
+}
 
 this.addTextArea = function addTextArea(form, name) {
   const div = $('<div class="form-group"></div>');

@@ -147,6 +147,7 @@
 
         $('#generic-modal').bind('shown.bs.modal', (event) => {
           $('#generic-modal input[name="id"]').val($(element).data('id'));
+          $('#generic-modal select[name="page"]').val($(element).data('page'));
           $("#generic-modal .ql-editor").html($(element).data('content'));
           $('#generic-modal textarea.d-none').val($(element).data('content'));
         });

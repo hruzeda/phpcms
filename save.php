@@ -50,11 +50,13 @@ if (LOGGED_USER === null) {
             require_once ROOT . "php/DynamicBlock.php";
 
             $id = intval($_POST['id']);
+            $page = intval($_POST['page']);
             $content = htmlentities($_POST['content'], ENT_QUOTES);
 
             if ($id > 0) {
                 $dynamicBlock = app\DynamicBlock::load($mysql, $id);
                 $dynamicBlock->setContent($content);
+                $dynamicBlock->setPage($page);
                 die($dynamicBlock->save($mysql));
             }
             break;

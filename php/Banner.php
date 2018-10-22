@@ -83,9 +83,9 @@ class Banner
      */
     public static function getAttributeArray()
     {
-        return array('image' => array('type' => 'image', 'placeholder' => '', 'required' => false),
-            'link' => array('type' => 'string', 'placeholder' => 'Link', 'required' => false),
-            'sequence' => array('type' => 'int', 'placeholder' => 'Posição', 'required' => true));
+        return array('image' => array('type' => 'image', 'placeholder' => '', 'required' => 'false'),
+            'link' => array('type' => 'string', 'placeholder' => 'Link', 'required' => 'false'),
+            'sequence' => array('type' => 'int', 'placeholder' => 'Posição', 'required' => 'true'));
     }
 
     /**

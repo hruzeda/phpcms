@@ -15,15 +15,17 @@ class DynamicBlock
 {
     private $id;
     private $content;
+    private $page;
 
     /**
      * DynamicBlock constructor.
      * @param $content
      */
-    public function __construct($content)
+    public function __construct($content, $page)
     {
         $this->id = null;
         $this->content = $content;
+        $this->page = $page;
     }
 
     /**
@@ -33,12 +35,12 @@ class DynamicBlock
      */
     public static function load($mysql, $id)
     {
-        $result = $mysql->query("SELECT content FROM dynamic_block WHERE id = {$id} LIMIT 1");
+        $result = $mysql->query("SELECT content, page FROM dynamic_block WHERE id = {$id} LIMIT 1");
         if ($result->num_rows === 1) {
             $result->data_seek(0);
             $result = $result->fetch_assoc();
 
-            $dynamicBlock = new DynamicBlock($result['content']);
+            $dynamicBlock = new DynamicBlock($result['content'], $result['page']);
             $dynamicBlock->id = $id;
             return $dynamicBlock;
         } else {
@@ -51,7 +53,14 @@ class DynamicBlock
      */
     public static function getAttributeArray()
     {
-        return array('content' => array('type' => 'text', 'placeholder' => '', 'required' => true));
+        return array('content' => array('type' => 'text', 'placeholder' => '', 'required' => 'true'),
+            'page' => array(
+                'type' => 'join',
+                'options' => json_encode(Page::loadAllToJSON(App::getConnection()), JSON_FORCE_OBJECT),
+                'placeholder' => 'Página',
+                'required' => 'false'
+            )
+        );
     }
 
     /**
@@ -64,7 +73,9 @@ class DynamicBlock
 
         $result = $mysql->query("SELECT content FROM dynamic_block WHERE id = {$this->id}");
         if ($result->num_rows === 1) {
-            $status = $mysql->query("UPDATE dynamic_block SET content = '{$this->content}' WHERE id = {$this->id}");
+            $status = $mysql->query("UPDATE dynamic_block SET
+                content = '{$this->content}',
+                page = $this->page WHERE id = {$this->id}");
 
             if ($status !== true) {
                 $status = $mysql->error;
@@ -94,6 +105,22 @@ class DynamicBlock
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * @return int
+     */
+    public function getPage()
+    {
+        return $this->page;
+    }
+
+    /**
+     * @param int $page
+     */
+    public function setPage($page)
+    {
+        $this->page = $page;
     }
 
     /**

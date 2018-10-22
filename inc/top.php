@@ -16,27 +16,26 @@
 
   <meta name="description" content="Centro Cultural localizado na cidade de Campinas cuja missão é
     apoiar na formação dos estudantes universitários e de ensino médio.">
-  <meta name="keywords" content="">
+  <meta name="keywords" content="Centro Castelo, Centro Cultural">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <meta property="og:title" content=""/>
-  <meta property="og:description" content=""/>
-  <meta property="og:image" content=""/>
-  <meta property="og:image" content="www.meusite.com.br/imagem.jpg">
-  <meta property="og:image:type" content="image/jpeg">
-  <meta property="og:image:width" content="800">
-  <meta property="og:image:height" content="600">
-  <meta property="og:type" content="article">
+  <meta property="og:title" content="Centro Castelo"/>
+  <!--<meta property="og:description" content=""/>-->
+  <meta property="og:image" content="http://centrocastelo.org.br/img/logo.png">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="251">
+  <meta property="og:image:height" content="122">
+  <!--<meta property="og:type" content="article">
   <meta property="article:author" content="Autor do artigo">
   <meta property="article:section" content="Seção do artigo">
   <meta property="article:tag" content="Tags do artigo">
-  <meta property="article:published_time" content="date_time">
+  <meta property="article:published_time" content="date_time">-->
 
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <title>Centro Castelo</title>
-    <?php //<base href="http://localhost/centrocastelo/"> ?>
+  <!--<base href="http://localhost/centrocastelo/">-->
   <base href="http://centrocastelo.org.br/">
 
   <link rel="stylesheet" type="text/css" href="css/style.css"/>

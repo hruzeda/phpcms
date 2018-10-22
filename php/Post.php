@@ -90,9 +90,9 @@ class Post
      */
     public static function getAttributeArray()
     {
-        return array('image' => array('type' => 'image', 'placeholder' => '', 'required' => false),
-            'title' => array('type' => 'string', 'placeholder' => 'Título', 'required' => true),
-            'content' => array('type' => 'text', 'placeholder' => '', 'required' => true));
+        return array('image' => array('type' => 'image', 'placeholder' => '', 'required' => 'false'),
+            'title' => array('type' => 'string', 'placeholder' => 'Título', 'required' => 'true'),
+            'content' => array('type' => 'text', 'placeholder' => '', 'required' => 'true'));
     }
 
     /**

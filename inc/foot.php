@@ -14,31 +14,34 @@
     <?php $dynamicBlock = app\DynamicBlock::load($mysql, 1); ?>
   <div class="p-4 py-5 my-3 dynamic-block"
        data-id="<?= $dynamicBlock->getId(); ?>"
+       data-page="<?= $dynamicBlock->getPage(); ?>"
        data-content="<?= $dynamicBlock->getContent(); ?>"
        style="background: #feb614 url('img/ocentro.png') 95% 5% no-repeat;">
     <h4>O Centro</h4>
     <p class="mb-0"><?= $dynamicBlock->getHTMLContent(); ?></p>
-    <a href="ocentro.php">Saiba mais</a>
+    <a href="page/<?= $dynamicBlock->getPage(); ?>">Saiba mais</a>
   </div>
 
     <?php $dynamicBlock = app\DynamicBlock::load($mysql, 2); ?>
   <div class="p-4 py-5 mb-3 dynamic-block"
        data-id="<?= $dynamicBlock->getId(); ?>"
+       data-page="<?= $dynamicBlock->getPage(); ?>"
        data-content="<?= $dynamicBlock->getContent(); ?>"
        style="background: #0065b3 url('img/residencia.png') 95% 5% no-repeat;">
     <h4>Residência</h4>
     <p class="mb-0"><?= $dynamicBlock->getHTMLContent(); ?></p>
-    <a href="residencia.php">Saiba mais</a>
+    <a href="page/<?= $dynamicBlock->getPage(); ?>">Saiba mais</a>
   </div>
 
     <!--< ?php $dynamicBlock = app\DynamicBlock::load($mysql, 3); ?>
   <div class="p-4 py-5 mb-3 dynamic-block"
        data-id="< ?= $dynamicBlock->getId(); ?>"
+       data-page="< ?= $dynamicBlock->getPage(); ?>"
        data-content="< ?= $dynamicBlock->getContent(); ?>"
        style="background: #9e9fa3 url('img/noticias.png') 95% 5% no-repeat;">
     <h4>Notícias</h4>
     <p class="mb-0">< ?= $dynamicBlock->getHTMLContent(); ?></p>
-    <a href="noticias.php">Saiba mais</a>
+    <a href="page/< ?= $dynamicBlock->getPage(); ?>">Saiba mais</a>
   </div>-->
 </aside><!-- /.blog-sidebar -->
 </div><!-- /.row -->
@@ -51,6 +54,7 @@
         <?php $dynamicBlock = app\DynamicBlock::load($mysql, 4); ?>
       <p class="dynamic-block"
          data-id="<?= $dynamicBlock->getId(); ?>"
+         data-page="<?= $dynamicBlock->getPage(); ?>"
          data-content="<?= $dynamicBlock->getContent(); ?>">
             <?= $dynamicBlock->getHTMLContent(); ?>
         Fone: <a href="tel:+551932432164">+55 19 3243-2164</a>

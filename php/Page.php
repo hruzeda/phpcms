@@ -86,13 +86,31 @@ class Page
     }
 
     /**
+     * @param $mysql
+     * @return array
+     */
+    public static function loadAllToJSON($mysql)
+    {
+        $list = array();
+        $result = $mysql->query("SELECT id, title FROM page ORDER BY id ASC");
+        if ($result->num_rows > 0) {
+            $result->data_seek(0);
+            while ($pResult = $result->fetch_assoc()) {
+                $page = array('id' => $pResult['id'], 'title' => $pResult['title']);
+                array_push($list, $page);
+            }
+        }
+        return $list;
+    }
+
+    /**
      * @return array of types
      */
     public static function getAttributeArray()
     {
-        return array('image' => array('type' => 'image', 'placeholder' => '', 'required' => false),
-            'title' => array('type' => 'string', 'placeholder' => 'Título', 'required' => true),
-            'content' => array('type' => 'text', 'placeholder' => '', 'required' => true));
+        return array('image' => array('type' => 'image', 'placeholder' => '', 'required' => 'false'),
+            'title' => array('type' => 'string', 'placeholder' => 'Título', 'required' => 'true'),
+            'content' => array('type' => 'text', 'placeholder' => '', 'required' => 'true'));
     }
 
     /**
