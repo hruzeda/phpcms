@@ -18,7 +18,8 @@ class Post
     private $thumb;
     private $title;
     private $content;
-    private $lastUpdate;
+    private $created;
+    private $updated;
 
     /**
      * Post constructor.
@@ -34,7 +35,8 @@ class Post
         $this->thumb = $thumb;
         $this->title = $title;
         $this->content = $content;
-        $this->lastUpdate = null;
+        $this->created = null;
+        $this->updated = null;
     }
 
     /**
@@ -44,14 +46,15 @@ class Post
      */
     public static function load($mysql, $id)
     {
-        $result = $mysql->query("SELECT image, thumb, title, content, last_update FROM post WHERE id = {$id} LIMIT 1");
+        $result = $mysql->query("SELECT image, thumb, title, content,  created, updated FROM post WHERE id = {$id} LIMIT 1");
         if ($result->num_rows === 1) {
             $result->data_seek(0);
             $result = $result->fetch_assoc();
 
             $post = new Post($result['image'], $result['thumb'], $result['title'], $result['content']);
             $post->id = $id;
-            $post->lastUpdate = $result['last_update'];
+            $post->created = $result['created'];
+            $post->updated = $result['updated'];
             return $post;
         } else {
             return null;
@@ -70,14 +73,15 @@ class Post
         $page *= $pageSize;
         $list = array();
 
-        $result = $mysql->query("SELECT id, image, thumb, title, content, last_update FROM post " .
+        $result = $mysql->query("SELECT id, image, thumb, title, content, created, updated FROM post " .
             "ORDER BY {$order} LIMIT {$page}, {$pageSize}");
         if ($result->num_rows > 0) {
             $result->data_seek(0);
             while ($pResult = $result->fetch_assoc()) {
                 $post = new Post($pResult['image'], $pResult['thumb'], $pResult['title'], $pResult['content']);
                 $post->id = $pResult['id'];
-                $post->lastUpdate = $pResult['last_update'];
+                $post->created = $pResult['created'];
+                $post->updated = $pResult['updated'];
                 array_push($list, $post);
             }
         }
@@ -237,8 +241,8 @@ class Post
     /**
      * @return string
      */
-    public function getLastUpdate()
+    public function getCreatedDate()
     {
-        return ucwords(utf8_encode(strftime('%A, %e de %B de %Y', strtotime($this->lastUpdate))));
+        return ucwords(utf8_encode(strftime('%A, %e de %B de %Y', strtotime($this->created))));
     }
 }

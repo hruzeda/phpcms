@@ -1,6 +1,7 @@
 {
-    "name": "centrocastelo",
+    "name": "hruzeda/simplescms",
     "type": "project",
+    "version": "1.0.0",
     "require": {
         "phpmailer/phpmailer": "^6.0"
     },

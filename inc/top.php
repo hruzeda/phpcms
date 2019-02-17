@@ -19,9 +19,9 @@
   <meta name="keywords" content="Centro Castelo, Centro Cultural">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <meta property="og:title" content="Centro Castelo"/>
+  <meta property="og:title" content="PHP CMS"/>
   <!--<meta property="og:description" content=""/>-->
-  <meta property="og:image" content="http://centrocastelo.org.br/img/logo.png">
+  <meta property="og:image" content="http://localhost/phpcms/img/logo.png">
   <meta property="og:image:type" content="image/png">
   <meta property="og:image:width" content="251">
   <meta property="og:image:height" content="122">
@@ -34,13 +34,14 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>Centro Castelo</title>
-  <!--<base href="http://localhost/centrocastelo/">-->
-  <base href="http://centrocastelo.org.br/">
+  <title>PHP CMS</title>
+  <base href="http://localhost/phpcms/">
 
   <link rel="stylesheet" type="text/css" href="css/style.css"/>
 
   <script type="text/javascript" src="node_modules/jquery/dist/jquery.min.js"></script>
+  <script type="text/javascript" src="node_modules/jquery-form/dist/jquery.form.min.js"></script>
+  <script type="text/javascript" src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
 </head>
 
 <body>
@@ -94,7 +95,7 @@
       <a class="py-2 px-3 mx-1 active" href="index.php">Início</a>
 
         <?php $mysql = app\App::getConnection();
-        $pages = app\Page::loadAll($mysql, 'last_update DESC', 0, 20);
+        $pages = app\Page::loadAll($mysql, 'created DESC', 0, 20);
         foreach ($pages as $page) { ?>
       <a class="py-2 px-3 mx-1 active" href="page/<?= $page->getId(); ?>"><?= $page->getTitle(); ?></a>
         <?php } ?>

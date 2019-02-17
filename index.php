@@ -39,7 +39,7 @@ require_once ROOT . 'inc/top.php'; ?>
 
 <div class="row">
   <div class="col-md-8 blog-main">
-    <?php $posts = app\Post::loadAll($mysql, 'last_update DESC', 0, 5);
+    <?php $posts = app\Post::loadAll($mysql, 'created DESC', 0, 5);
     foreach ($posts as $post) { ?>
       <div class="blog-post post"
         data-id="<?= $post->getId(); ?>"

@@ -18,7 +18,8 @@ class Page
     private $thumb;
     private $title;
     private $content;
-    private $lastUpdate;
+    private $created;
+    private $updated;
 
     /**
      * Page constructor.
@@ -34,7 +35,8 @@ class Page
         $this->thumb = $thumb;
         $this->title = $title;
         $this->content = $content;
-        $this->lastUpdate = null;
+        $this->created = null;
+        $this->updated = null;
     }
 
     /**
@@ -44,14 +46,15 @@ class Page
      */
     public static function load($mysql, $id)
     {
-        $result = $mysql->query("SELECT image, thumb, title, content, last_update FROM page WHERE id = {$id} LIMIT 1");
+        $result = $mysql->query("SELECT image, thumb, title, content, created, updated FROM page WHERE id = {$id} LIMIT 1");
         if ($result->num_rows === 1) {
             $result->data_seek(0);
             $result = $result->fetch_assoc();
 
             $page = new Page($result['image'], $result['thumb'], $result['title'], $result['content']);
             $page->id = $id;
-            $page->lastUpdate = $result['last_update'];
+            $page->created = $result['created'];
+            $page->updated = $result['updated'];
             return $page;
         } else {
             return null;
@@ -70,14 +73,15 @@ class Page
         $page *= $pageSize;
         $list = array();
 
-        $result = $mysql->query("SELECT id, image, thumb, title, content, last_update FROM page " .
+        $result = $mysql->query("SELECT id, image, thumb, title, content, created, updated FROM page " .
             "ORDER BY {$order} LIMIT {$page}, {$pageSize}");
         if ($result->num_rows > 0) {
             $result->data_seek(0);
             while ($pResult = $result->fetch_assoc()) {
                 $page = new Page($pResult['image'], $pResult['thumb'], $pResult['title'], $pResult['content']);
                 $page->id = $pResult['id'];
-                $page->lastUpdate = $pResult['last_update'];
+                $page->created = $pResult['created'];
+                $page->updated = $pResult['updated'];
                 array_push($list, $page);
             }
         }
@@ -255,8 +259,8 @@ class Page
     /**
      * @return string
      */
-    public function getLastUpdate()
+    public function getCreatedDate()
     {
-        return ucwords(utf8_encode(strftime('%A, %e de %B de %Y', strtotime($this->lastUpdate))));
+        return ucwords(utf8_encode(strftime('%A, %e de %B de %Y', strtotime($this->created))));
     }
 }

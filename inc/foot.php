@@ -124,8 +124,6 @@
 </footer>
 
 <script type="text/javascript" src="node_modules/slick-carousel/slick/slick.min.js"></script>
-<script type="text/javascript" src="node_modules/jquery-form/dist/jquery.form.min.js"></script>
-<script type="text/javascript" src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="node_modules/katex/dist/katex.min.js"></script>
 <script type="text/javascript" src="node_modules/highlight.js/lib/highlight.js"></script>
 <script type="text/javascript" src="node_modules/quill/dist/quill.min.js"></script>
