@@ -1,13 +1,13 @@
 <?php
 /**
- * PHP Version 7.2.6
+ * PHP Version 7.3.1
  * Foot include for all pages
  *
  * @category Include
  * @package  None
  * @author   hruzeda <hruzeda@gmail.com>
  * @license  http://www.gnu.org/copyleft/gpl.html GNU General Public License
- * @link     http://centrocastelo.org.br
+ * @link     http://phpcms.com.br
  */ ?>
 
 <aside class="col-md-4 blog-sidebar">
@@ -99,7 +99,7 @@
 
     <div class="col-md-4 col-sm-12 my-5 px-4">
       <h4>Facebook</h4>
-      <div class="fb-page" data-href="https://www.facebook.com/centrocastelo.org.br/"
+      <div class="fb-page" data-href="https://www.facebook.com/"
            data-tabs="timeline" data-height="310" data-small-header="false"
            data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true">
       </div>

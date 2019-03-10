@@ -1,14 +1,15 @@
 <?php
 /**
- * PHP Version 7.2.6
+ * PHP Version 7.3.1
  * Dynamic block class
  *
  * @category Class
  * @package  app
  * @author   hruzeda <hruzeda@gmail.com>
  * @license  http://www.gnu.org/copyleft/gpl.html GNU General Public License
- * @link     http://centrocastelo.org.br
+ * @link     http://phpcms.com.br
  */
+
 namespace app;
 
 class DynamicBlock
@@ -53,14 +54,14 @@ class DynamicBlock
      */
     public static function getAttributeArray()
     {
-        return array('content' => array('type' => 'text', 'placeholder' => '', 'required' => 'true'),
+        return json_encode(array('content' => array('type' => 'text', 'placeholder' => '', 'required' => 'true'),
             'page' => array(
                 'type' => 'join',
                 'options' => json_encode(Page::loadAllToJSON(App::getConnection()), JSON_FORCE_OBJECT),
                 'placeholder' => 'Página',
                 'required' => 'false'
             )
-        );
+        ), JSON_FORCE_OBJECT);
     }
 
     /**

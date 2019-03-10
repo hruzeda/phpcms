@@ -1,13 +1,13 @@
 <?php
 /**
- * PHP Version 7.2.6
+ * PHP Version 7.3.1
  * Login script
  *
  * @category Script
  * @package  None
  * @author   hruzeda <hruzeda@gmail.com>
  * @license  http://www.gnu.org/copyleft/gpl.html GNU General Public License
- * @link     http://centrocastelo.org.br
+ * @link     http://phpcms.com.br
  */
 session_start();
 require_once 'const.php';
@@ -27,7 +27,7 @@ if (LOGGED_USER != null) {
         $salt = '#supersalt@';
         $hash = hash_pbkdf2('sha512', $pwd, $salt, 17);
 
-        if ($hash === $validHash) {
+        if (strcmp($hash, $validHash) == 0) {
             $_SESSION['logged_user'] = true;
             die('1');
         }

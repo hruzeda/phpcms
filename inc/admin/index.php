@@ -1,13 +1,13 @@
 <?php
 /**
- * PHP Version 7.2.6
+ * PHP Version 7.3.1
  * Menu admin include
  *
  * @category Include
  * @package  None
  * @author   hruzeda <hruzeda@gmail.com>
  * @license  http://www.gnu.org/copyleft/gpl.html GNU General Public License
- * @link     http://centrocastelo.org.br
+ * @link     http://phpcms.com.br
  */ ?>
 <div id="cover"></div>
 
@@ -21,26 +21,48 @@
 
 <script type="text/javascript" src="js/init.admin.js"></script>
 <script type="text/javascript">
+  this.populateForm = function populateForm(form, data) {
+    this.addHiddenInput(form, 'id', 0);
+    var attrs = JSON.parse(data);
+    for (attr in attrs) {
+      if (attr.type === "int") {
+        this.addNumberInput(form, attr.name, attr.placeholder, attr.required);
+      } else if (attr.type === "string") {
+        this.addTextInput(form, attr.name, attr.placeholder, attr.required);
+      } else if ($props['type'] === "image") {
+        this.addImageInput(form, attr.name, attr.required);
+      } else if ($props['type'] === "text") {
+        this.addTextArea(form, attr.name);
+      } else if ($props['type'] === "join") {
+        this.addSelect(form, attr.name, attr.options, attr.placeholder, attr.required);
+      }
+    }
+    this.addSubmitInput(form);
+  }
+
   $(() => {
     $('#btnBanner').on('click', (event) => {
       let form = $('<form action="save.php?entity=banner" method="post" enctype="multipart/form-data"></form>');
-        <?php $attr = app\Banner::getAttributeArray();
-        app\App::populateForm($attr); ?>
-      this.showModal('Novo Banner', form);
+      $.post('attributeArray.php', 'Banner', (data) => {
+        this.populateForm(form, data);
+        this.showModal('Novo Banner', form);
+      });
     });
 
     $('#btnPost').on('click', (event) => {
       let form = $('<form action="save.php?entity=post" method="post" enctype="multipart/form-data"></form>');
-        <?php $attr = app\Post::getAttributeArray();
-        app\App::populateForm($attr); ?>
-      this.showModal('Novo Post', form);
+      $.post('attributeArray.php', 'Banner', (data) => {
+        this.populateForm(form, data);
+        this.showModal('Novo Post', form);
+      });
     });
 
     $('#btnPage').on('click', (event) => {
       let form = $('<form action="save.php?entity=page" method="post" enctype="multipart/form-data"></form>');
-        <?php $attr = app\Page::getAttributeArray();
-        app\App::populateForm($attr); ?>
-      this.showModal('Nova Página', form);
+      $.post('attributeArray.php', 'Banner', (data) => {
+        this.populateForm(form, data);
+        this.showModal('Nova Página', form);
+      });
     });
 
     // DELETE BUTTON TEMPLATE
@@ -142,8 +164,8 @@
 
       $(editClone).on('click', (event) => {
         let form = $('<form action="save.php?entity=dynamicBlock" method="post"></form>');
-            <?php $attr = app\DynamicBlock::getAttributeArray();
-            app\App::populateForm($attr); ?>
+          <?php $attr = app\DynamicBlock::getAttributeArray();
+          app\App::populateForm($attr); ?>
 
         $('#generic-modal').bind('shown.bs.modal', (event) => {
           $('#generic-modal input[name="id"]').val($(element).data('id'));

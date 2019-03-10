@@ -1,13 +1,13 @@
 <?php
 /**
- * PHP Version 7.2.6
+ * PHP Version 7.3.1
  * Login to admin component
  *
  * @category Include
  * @package  None
  * @author   hruzeda <hruzeda@gmail.com>
  * @license  http://www.gnu.org/copyleft/gpl.html GNU General Public License
- * @link     http://centrocastelo.org.br
+ * @link     http://phpcms.com.br
  */ ?>
 <button id="btn-show-login" type="button" class="btn btn-dark" data-toggle="modal"
   data-target="#login-modal">

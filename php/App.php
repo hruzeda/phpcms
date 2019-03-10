@@ -1,13 +1,13 @@
 <?php
 /**
- * PHP Version 7.2.6
+ * PHP Version 7.3.1
  * Main application class
  *
  * @category Class
  * @package  app
  * @author   hruzeda <hruzeda@gmail.com>
  * @license  http://www.gnu.org/copyleft/gpl.html GNU General Public License
- * @link     http://centrocastelo.org.br
+ * @link     http://phpcms.com.br
  */
 namespace app;
 
@@ -64,36 +64,6 @@ class App
         $token = md5(uniqid(microtime(), true));
         $_SESSION[$form . '_token'] = $token;
         return $token;
-    }
-
-    /**
-     * @param $attributes of the entity
-     */
-    public static function populateForm($attributes)
-    {
-        echo "this.addHiddenInput(form, 'id', 0);";
-
-        foreach ($attributes as $name => $props) {
-            if ($props['type'] === "int") {
-                echo "this.addNumberInput(form, '{$name}', '{$props['placeholder']}', {$props['required']});";
-            } elseif ($props['type'] === "string") {
-                echo "this.addTextInput(form, '{$name}', '{$props['placeholder']}', {$props['required']});";
-            } elseif ($props['type'] === "image") {
-                echo "this.addImageInput(form, '{$name}', {$props['required']});";
-            } elseif ($props['type'] === "text") {
-                echo "this.addTextArea(form, '{$name}');";
-            } elseif ($props['type'] === "join") {
-                echo "this.addSelect(
-                    form,
-                    '{$name}',
-                    {$props['options']},
-                    '{$props['placeholder']}',
-                    {$props['required']}
-                );";
-            }
-        }
-
-        echo "this.addSubmitInput(form);";
     }
 
     /**

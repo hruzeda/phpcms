@@ -6,7 +6,7 @@
 	RewriteEngine on
 
 	RewriteCond %{SERVER_PORT} 80
-	#RewriteRule ^(.*)$ http://localhost/centrocastelo/$1 [R,L]
+	#RewriteRule ^(.*)$ http://localhost/phpcms/$1 [R,L]
 
 	DefaultLanguage pt-BR
 	AddDefaultCharset UTF-8

@@ -1,13 +1,13 @@
 <?php
 /**
- * PHP Version 7.2.6
+ * PHP Version 7.3.1
  * Alert admin component
  *
  * @category Include
  * @package  None
  * @author   hruzeda <hruzeda@gmail.com>
  * @license  http://www.gnu.org/copyleft/gpl.html GNU General Public License
- * @link     http://centrocastelo.org.br
+ * @link     http://phpcms.com.br
  */ ?>
 <div class="modal fade" id="alert-modal" tabindex="-1" role="dialog"
      aria-labelledby="alert-modal-label" aria-hidden="true">

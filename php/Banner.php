@@ -1,14 +1,15 @@
 <?php
 /**
- * PHP Version 7.2.6
+ * PHP Version 7.3.1
  * Banner class
  *
  * @category Class
  * @package  app
  * @author   hruzeda <hruzeda@gmail.com>
  * @license  http://www.gnu.org/copyleft/gpl.html GNU General Public License
- * @link     http://centrocastelo.org.br
+ * @link     http://phpcms.com.br
  */
+
 namespace app;
 
 class Banner
@@ -83,9 +84,9 @@ class Banner
      */
     public static function getAttributeArray()
     {
-        return array('image' => array('type' => 'image', 'placeholder' => '', 'required' => 'false'),
+        return json_encode(array('image' => array('type' => 'image', 'placeholder' => '', 'required' => 'false'),
             'link' => array('type' => 'string', 'placeholder' => 'Link', 'required' => 'false'),
-            'sequence' => array('type' => 'int', 'placeholder' => 'Posição', 'required' => 'true'));
+            'sequence' => array('type' => 'int', 'placeholder' => 'Posição', 'required' => 'true')), JSON_FORCE_OBJECT);
     }
 
     /**

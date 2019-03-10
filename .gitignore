@@ -1,2 +1,6 @@
+.buildpath
+.project
+.settings/*
+.idea/*
 node_modules/*
 vendor/*

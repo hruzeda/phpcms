@@ -1,14 +1,15 @@
 <?php
 /**
- * PHP Version 7.2.6
+ * PHP Version 7.3.1
  * Page class
  *
  * @category Class
  * @package  app
  * @author   hruzeda <hruzeda@gmail.com>
  * @license  http://www.gnu.org/copyleft/gpl.html GNU General Public License
- * @link     http://centrocastelo.org.br
+ * @link     http://phpcms.com.br
  */
+
 namespace app;
 
 class Page
@@ -112,9 +113,9 @@ class Page
      */
     public static function getAttributeArray()
     {
-        return array('image' => array('type' => 'image', 'placeholder' => '', 'required' => 'false'),
+        return json_encode(array('image' => array('type' => 'image', 'placeholder' => '', 'required' => 'false'),
             'title' => array('type' => 'string', 'placeholder' => 'Título', 'required' => 'true'),
-            'content' => array('type' => 'text', 'placeholder' => '', 'required' => 'true'));
+            'content' => array('type' => 'text', 'placeholder' => '', 'required' => 'true')), JSON_FORCE_OBJECT);
     }
 
     /**

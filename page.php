@@ -1,13 +1,13 @@
 <?php
 /**
- * PHP Version 7.2.6
+ * PHP Version 7.3.1
  * The custom page view
  *
  * @category View
  * @package  None
  * @author   hruzeda <hruzeda@gmail.com>
  * @license  http://www.gnu.org/copyleft/gpl.html GNU General Public License
- * @link     http://centrocastelo.org.br
+ * @link     http://phpcms.com.br
  */
 session_start();
 
@@ -43,7 +43,7 @@ require_once ROOT . 'inc/top.php'; ?>
       </div>
 
       <div class="fb-comments"
-         data-href="http://centrocastelo.org.br/page.php?id=<?= $page->getId(); ?>"
+         data-href="http://phpcms.com.br/page.php?id=<?= $page->getId(); ?>"
          data-width="100%" data-numposts="5"></div>
   </div><!-- /.blog-main -->
 
