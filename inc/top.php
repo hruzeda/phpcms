@@ -92,7 +92,7 @@
 
   <div class="nav-scroller py-1 mb-2">
     <nav class="nav d-flex">
-      <a class="py-2 px-3 mx-1 active" href="index.php">Início</a>
+      <a class="py-2 px-3 mx-1 active" href="index.php">Home</a>
 
         <?php $mysql = app\App::getConnection();
         $pages = app\Page::loadAll($mysql, 'created DESC', 0, 20);

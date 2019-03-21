@@ -48,7 +48,7 @@ class App
             return self::$connection;
         }
 
-        self::$connection = new \mysqli("localhost", "root", "root", "phpcms");
+        self::$connection = new \mysqli("localhost", "root", "root", "cms");
         if (self::$connection->connect_error) {
             throw new \Exception("Unable to connect to database");
         }

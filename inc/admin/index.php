@@ -13,9 +13,9 @@
 
 <div id="menu-admin" class="nav-scroller py-1 mb-2">
   <nav class="nav d-flex">
-    <button id="btnBanner" class="btn btn-primary mr-2">Novo Banner</button>
-    <button id="btnPost" class="btn btn-primary mr-2">Novo Post</button>
-    <button id="btnPage" class="btn btn-primary">Nova Página</button>
+    <button id="btnBanner" class="btn btn-primary mr-2">New Banner</button>
+    <button id="btnPost" class="btn btn-primary mr-2">New Post</button>
+    <button id="btnPage" class="btn btn-primary">New Page</button>
   </nav>
 </div>
 
@@ -164,8 +164,9 @@
 
       $(editClone).on('click', (event) => {
         let form = $('<form action="save.php?entity=dynamicBlock" method="post"></form>');
-          <?php $attr = app\DynamicBlock::getAttributeArray();
-          app\App::populateForm($attr); ?>
+        $.post('attributeArray.php', 'DynamicBlock', (data) => {
+        this.populateForm(form, data);
+        this.showModal('Nova Página', form);
 
         $('#generic-modal').bind('shown.bs.modal', (event) => {
           $('#generic-modal input[name="id"]').val($(element).data('id'));

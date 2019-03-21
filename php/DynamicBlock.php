@@ -155,7 +155,7 @@ class DynamicBlock
     public function getTextContent()
     {
         $aux = preg_replace("/<p[^>]*?>/", "", html_entity_decode($this->content));
-        $aux = str_replace("</p>", " ", $aux);
+        $aux = preg_replace("/(<\/p>|\||\n|\r)/", " ", $aux);
         return strip_tags($aux);
     }
 }

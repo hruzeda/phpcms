@@ -16,10 +16,9 @@
        data-id="<?= $dynamicBlock->getId(); ?>"
        data-page="<?= $dynamicBlock->getPage(); ?>"
        data-content="<?= $dynamicBlock->getContent(); ?>"
-       style="background: #feb614 url('img/ocentro.png') 95% 5% no-repeat;">
-    <h4>O Centro</h4>
+       style="background: #feb614;">
     <p class="mb-0"><?= $dynamicBlock->getHTMLContent(); ?></p>
-    <a href="page/<?= $dynamicBlock->getPage(); ?>">Saiba mais</a>
+    <a href="page/<?= $dynamicBlock->getPage(); ?>">Read more</a>
   </div>
 
     <?php $dynamicBlock = app\DynamicBlock::load($mysql, 2); ?>
@@ -27,10 +26,9 @@
        data-id="<?= $dynamicBlock->getId(); ?>"
        data-page="<?= $dynamicBlock->getPage(); ?>"
        data-content="<?= $dynamicBlock->getContent(); ?>"
-       style="background: #0065b3 url('img/residencia.png') 95% 5% no-repeat;">
-    <h4>Residência</h4>
+       style="background: #0065b3">
     <p class="mb-0"><?= $dynamicBlock->getHTMLContent(); ?></p>
-    <a href="page/<?= $dynamicBlock->getPage(); ?>">Saiba mais</a>
+    <a href="page/<?= $dynamicBlock->getPage(); ?>">Read more</a>
   </div>
 
     <!--< ?php $dynamicBlock = app\DynamicBlock::load($mysql, 3); ?>
@@ -50,14 +48,14 @@
 <footer class="blog-footer container-fluid">
   <div class="container row mx-auto">
     <div class="col-md-4 col-sm-12 my-5 px-4">
-      <h4>Localização</h4>
+      <h4>Location</h4>
         <?php $dynamicBlock = app\DynamicBlock::load($mysql, 4); ?>
       <p class="dynamic-block"
          data-id="<?= $dynamicBlock->getId(); ?>"
          data-page="<?= $dynamicBlock->getPage(); ?>"
          data-content="<?= $dynamicBlock->getContent(); ?>">
             <?= $dynamicBlock->getHTMLContent(); ?>
-        Fone: <a href="tel:+551932432164">+55 19 3243-2164</a>
+        Phone: <a href="tel:+551932432164">+55 19 3243-2164</a>
       </p>
 
       <div id="mapView"></div>
@@ -105,17 +103,17 @@
       </div>
     </div>
     <div class="col-md-4 col-sm-12 my-5 px-4">
-      <h4>Fale Conosco</h4>
+      <h4>Contact us</h4>
 
         <?php $token = app\App::generateToken('contact'); ?>
       <form id="contactForm" method="post" action="mail.php">
         <input type="hidden" name="token" value="<?= $token; ?>" />
 
         <div class="form-group">
-          <input type="email" class="form-control" id="email" name="email" placeholder="Seu e-mail">
+          <input type="email" class="form-control" id="email" name="email" placeholder="E-mail address">
         </div>
         <div class="form-group">
-          <textarea class="form-control" id="msg" name="msg" placeholder="Sua mensagem"></textarea>
+          <textarea class="form-control" id="msg" name="msg" placeholder="Your message"></textarea>
         </div>
         <button type="submit" class="btn btn-danger">Enviar</button>
       </form>

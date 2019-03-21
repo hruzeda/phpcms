@@ -31,11 +31,11 @@
       <div class="modal-body">
         <?php if (LOGGED_USER == null) { ?>
           <div class="form-group">
-            <input class="form-control" type="password" id="pwd" name="pwd" placeholder="Senha" />
+            <input class="form-control" type="password" id="pwd" name="pwd" placeholder="Password" />
           </div>
         <?php } else { ?>
           <div class="form-group">
-            <input class="form-control" type="password" id="new" name="new" placeholder="Nova Senha" />
+            <input class="form-control" type="password" id="new" name="new" placeholder="New Password" />
           </div>
         <?php } ?>
       </div>
@@ -44,7 +44,7 @@
           <input type="submit" class="btn btn-primary" value="Login" />
           <input type="button" class="btn btn-secondary" data-dismiss="modal" value="Cancel" />
         <?php } else { ?>
-          <input type="submit" class="btn btn-primary" value="Trocar senha" />
+          <input type="submit" class="btn btn-primary" value="Change password" />
           <a href="<?php ROOT; ?>logout.php" class="btn btn-dark">Logout</a>
         <?php } ?>
       </div>
