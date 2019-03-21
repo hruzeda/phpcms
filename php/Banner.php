@@ -84,7 +84,7 @@ class Banner
      */
     public static function getAttributeArray()
     {
-        return json_encode(array('image' => array('type' => 'image', 'placeholder' => '', 'required' => 'false'),
+        return json_encode(array('image' => array('type' => 'image', 'placeholder' => '', 'required' => 'true'),
             'link' => array('type' => 'string', 'placeholder' => 'Link', 'required' => 'false'),
             'sequence' => array('type' => 'int', 'placeholder' => 'Posição', 'required' => 'true')), JSON_FORCE_OBJECT);
     }

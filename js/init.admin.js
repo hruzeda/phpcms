@@ -95,3 +95,168 @@ this.addSubmitInput = function addSubmitInput(form) {
   $(footer).append(cancel);
   $(form).append(footer);
 };
+
+this.populateForm = function populateForm(form, data) {
+  this.addHiddenInput(form, 'id', 0);
+  var json = JSON.parse(data);
+  var attrs = Object.keys(json);
+  for (var i = 0; i < attrs.length; i++) {
+    var key = attrs[i];
+    var attr = json[key];
+    if (attr.type === "int") {
+      this.addNumberInput(form, key, attr.placeholder, attr.required);
+    } else if (attr.type === "string") {
+      this.addTextInput(form, key, attr.placeholder, attr.required);
+    } else if (attr.type === "image") {
+      this.addImageInput(form, key, attr.required);
+    } else if (attr.type === "text") {
+      this.addTextArea(form, key);
+    } else if (attr.type === "join") {
+      this.addSelect(form, key, attr.options, attr.placeholder, attr.required);
+    }
+  }
+  this.addSubmitInput(form);
+}
+
+$(() => {
+  $('#btnBanner').on('click', (event) => {
+    let form = $('<form action="save.php?entity=banner" method="post" enctype="multipart/form-data"></form>');
+    $.post('attributeArray.php', {'model': 'Banner'}, (data) => {
+      this.populateForm(form, data);
+      this.showModal('Novo Banner', form);
+    });
+  });
+
+  $('#btnPost').on('click', (event) => {
+    let form = $('<form action="save.php?entity=post" method="post" enctype="multipart/form-data"></form>');
+    $.post('attributeArray.php', {'model': 'Post'}, (data) => {
+      this.populateForm(form, data);
+      this.showModal('Novo Post', form);
+    });
+  });
+
+  $('#btnPage').on('click', (event) => {
+    let form = $('<form action="save.php?entity=page" method="post" enctype="multipart/form-data"></form>');
+    $.post('attributeArray.php', {'model': 'Page'}, (data) => {
+      this.populateForm(form, data);
+      this.showModal('Nova Página', form);
+    });
+  });
+
+  // DELETE BUTTON TEMPLATE
+  let trash = $('<button class="btn btn-dark btn-admin"></button>');
+  let trashIcon = $('<span class="fas fa-trash-alt"></span>');
+  $(trash).append(trashIcon);
+
+  $(trash).on('click', (event) => {
+    if (confirm('Você tem certeza que deseja excluir este elemento?')) {
+      let element = $(event.currentTarget).parent();
+      $.post('delete.php', {
+        id: $(element).data('id'),
+        entity: $(element).data('type'),
+      }, (data) => {
+        if (parseInt(data, 10) === 1) {
+          window.location.reload();
+        } else {
+          this.alert('Erro', 'danger', data);
+        }
+      });
+    }
+  });
+
+  // EDIT BUTTON TEMPLATE
+  let edit = $('<button class="btn btn-dark btn-admin"></button>');
+  let editIcon = $('<span class="fas fa-pencil-alt"></span>');
+  $(edit).append(editIcon);
+
+  // EXISTING BANNERS
+  $('.carousel-item').each((index, element) => {
+    let editClone = $(edit).clone();
+    let trashClone = $(trash).clone(true);
+
+    $(editClone).on('click', (event) => {
+      $('#btnBanner').trigger('click');
+      $("#generic-modal-title").html("Editar banner");
+      $('#generic-modal input[name="id"]').val($(element).data('id'));
+      let bannerImg = $('<img src="' + $(element).find('img').attr('src') + '" />');
+      $('#generic-modal input[name="image"]').before(bannerImg);
+      $('#generic-modal input[name="link"]').val($(element).data('link'));
+      $('#generic-modal input[name="sequence"]').val($(element).data('sequence'));
+    });
+
+    $(element).append(editClone);
+    $(element).append(trashClone);
+  });
+
+  // EXISTING POSTS
+  $('.post').each((index, element) => {
+    let editClone = $(edit).clone();
+    let trashClone = $(trash).clone(true);
+
+    $(editClone).on('click', (event) => {
+      $('#generic-modal').bind('shown.bs.modal', (event) => {
+        $("#generic-modal-title").html("Editar post");
+        $('#generic-modal input[name="id"]').val($(element).data('id'));
+        let postImg = $('<img src="' + $(element).find('img').attr('src') + '" />');
+        $('#generic-modal input[name="image"]').before(postImg);
+        $('#generic-modal input[name="title"]').val($(element).data('title'));
+        $("#generic-modal .ql-editor").html($(element).data('content'));
+        $('#generic-modal textarea.d-none').val($(element).data('content'));
+      });
+
+      $('#btnPost').trigger('click');
+    });
+
+    $(element).css('background', '#ddd');
+    $(element).append(editClone);
+    $(element).append(trashClone);
+  });
+
+  // EXISTING PAGES
+  $('.page').each((index, element) => {
+    let editClone = $(edit).clone();
+    let trashClone = $(trash).clone(true);
+
+    $(editClone).on('click', (event) => {
+      $('#generic-modal').bind('shown.bs.modal', (event) => {
+        $("#generic-modal-title").html("Editar post");
+        $('#generic-modal input[name="id"]').val($(element).data('id'));
+        let postImg = $('<img src="' + $(element).find('img').attr('src') + '" />');
+        $('#generic-modal input[name="image"]').before(postImg);
+        $('#generic-modal input[name="title"]').val($(element).data('title'));
+        $("#generic-modal .ql-editor").html($(element).data('content'));
+        $('#generic-modal textarea.d-none').val($(element).data('content'));
+      });
+
+      $('#btnPost').trigger('click');
+    });
+
+    $(element).css('background', '#ddd');
+    $(element).append(editClone);
+    $(element).append(trashClone);
+  });
+
+  // EXISTING BLOCKS
+  $('.dynamic-block').each((index, element) => {
+    let editClone = $(edit).clone();
+
+    $(editClone).on('click', (event) => {
+      let form = $('<form action="save.php?entity=dynamicBlock" method="post"></form>');
+      $.post('attributeArray.php', 'DynamicBlock', (data) => {
+        this.populateForm(form, data);
+        this.showModal('Nova Página', form);
+      });
+
+      $('#generic-modal').bind('shown.bs.modal', (event) => {
+        $('#generic-modal input[name="id"]').val($(element).data('id'));
+        $('#generic-modal select[name="page"]').val($(element).data('page'));
+        $("#generic-modal .ql-editor").html($(element).data('content'));
+        $('#generic-modal textarea.d-none').val($(element).data('content'));
+      });
+
+      this.showModal('Editar caixa de conteúdo', form);
+    });
+
+    $(element).append(editClone);
+  });
+});

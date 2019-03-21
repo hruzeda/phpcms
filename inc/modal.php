@@ -37,24 +37,27 @@
   };
 
   $('#generic-modal').bind('shown.bs.modal', (event) => {
-    const quill = new Quill('#quill-editor', {
-      modules: {
-        formula: true,
-        syntax: true,
-        toolbar: [
-          [{'header': '1'}, {'header': '2'}, 'blockquote', 'code-block', {'size': []}],
-          [{'align': []}, 'bold', 'italic', 'underline', 'strike', {'script': 'super'}, {'script': 'sub'}],
-          [{'list': 'ordered'}, {'list': 'bullet'}, {'indent': '-1'}, {'indent': '+1'}],
-          [{'color': []}, {'background': []}, 'link', 'image', 'video', 'formula']
-        ],
-      },
-      theme: 'snow'
-    });
+    if($('#quill-editor').length > 0) {
+      const quill = new Quill('#quill-editor', {
+        modules: {
+          formula: true,
+          syntax: true,
+          toolbar: [
+            [{'header': '1'}, {'header': '2'}, 'blockquote', 'code-block', {'size': []}],
+            [{'align': []}, 'bold', 'italic', 'underline', 'strike', {'script': 'super'}, {'script': 'sub'}],
+            [{'list': 'ordered'}, {'list': 'bullet'}, {'indent': '-1'}, {'indent': '+1'}],
+            [{'color': []}, {'background': []}, 'link', 'image', 'video', 'formula']
+          ],
+        },
+        theme: 'snow'
+      });
+      
+      quill.on('text-change', (delta, oldDelta, source) => {
+        $('#generic-modal textarea.d-none').val($(quill.root).html());
+      });/*
+      quill.bind('hidden.bs.modal', (event) => {
 
-    quill.on('text-change', (delta, oldDelta, source) => {
-      $('#generic-modal textarea.d-none').val($(quill.root).html());
-    });
-  }).bind('hidden.bs.modal', (event) => {
-
+      });*/
+    }
   });
 </script>
