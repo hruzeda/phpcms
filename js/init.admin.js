@@ -4,7 +4,7 @@ this.addNumberInput = function addNumberInput(form, name, placeholder, required)
   $(field).attr('id', name);
   $(field).attr('placeholder', placeholder);
   $(field).attr('name', name);
-  if (required) {
+  if((/true/i).test(required)) {
     $(field).attr('required', 'required');
   }
   $(div).append(field);
@@ -17,7 +17,7 @@ this.addTextInput = function addTextInput(form, name, placeholder, required) {
   $(field).attr('id', name);
   $(field).attr('placeholder', placeholder);
   $(field).attr('name', name);
-  if (required) {
+  if((/true/i).test(required)) {
     $(field).attr('required', 'required');
   }
   $(div).append(field);
@@ -29,7 +29,7 @@ this.addImageInput = function addImageInput(form, name, required) {
   const field = $('<input type="file" accept="image/*" class="form-control" />');
   $(field).attr('id', name);
   $(field).attr('name', name);
-  if (required) {
+  if((/true/i).test(required)) {
     $(field).attr('required', 'required');
   }
   $(div).append(field);
@@ -38,23 +38,21 @@ this.addImageInput = function addImageInput(form, name, required) {
 
 this.addSelect = function addSelect(form, name, options, placeholder, required) {
   const div = $('<div class="form-group"></div>');
-  const field = $('<select class="form-control"><option selected value>placeholder</option></select>');
+  const field = $(`<select class="form-control"><option selected value="">${placeholder}</option></select>`);
   $(field).attr('id', name);
   $(field).attr('name', name);
 
-  if (required) {
+  if((/true/i).test(required)) {
     $(field).attr('required', 'required');
   }
 
-  $(field).children('option').html(placeholder);
-
   $.each(options, function(index, page) {
-    option = $("<option></option>");
+    option = $('option value=""></option>');
     $(option).attr('value', page.id);
     $(option).html(page.title);
     $(field).append(option);
   });
-
+  
   $(div).append(field);
   $(form).append(div);
 }
@@ -78,19 +76,21 @@ this.addHiddenInput = function addHiddenInput(form, name, value) {
   $(form).append(field);
 };
 
-this.addSubmitInput = function addSubmitInput(form) {
-  const footer = $('<div class="modal-footer"></div>');
-  const submit = $('<input type="submit" class="btn btn-primary" value="Salvar" />');
-  const cancel = $('<button class="btn btn-secondary" data-dismiss="modal">Cancel</button>');
-
-  $(form).ajaxForm((data) => {
+this.postForm = function postForm(form) {
+  debugger;
+  $.post($("#modalForm").attr('action'), $('#modalForm').serialize(), (data) => {
     if (parseInt(data, 10) === 1) {
       window.location.reload();
     } else {
       this.alert('Erro', 'danger', data);
     }
   });
+};
 
+this.addSubmitInput = function addSubmitInput(form) {
+  const footer = $('<div class="modal-footer"></div>');
+  const submit = $('<input type="submit" class="btn btn-primary" value="Salvar" />');
+  const cancel = $('<button class="btn btn-secondary" data-dismiss="modal">Cancel</button>');
   $(footer).append(submit);
   $(footer).append(cancel);
   $(form).append(footer);
@@ -112,7 +112,7 @@ this.populateForm = function populateForm(form, data) {
     } else if (attr.type === "text") {
       this.addTextArea(form, key);
     } else if (attr.type === "join") {
-      this.addSelect(form, key, attr.options, attr.placeholder, attr.required);
+      this.addSelect(form, key, JSON.parse(attr.options), attr.placeholder, attr.required);
     }
   }
   this.addSubmitInput(form);
@@ -120,24 +120,24 @@ this.populateForm = function populateForm(form, data) {
 
 $(() => {
   $('#btnBanner').on('click', (event) => {
-    let form = $('<form action="save.php?entity=banner" method="post" enctype="multipart/form-data"></form>');
-    $.post('attributeArray.php', {'model': 'Banner'}, (data) => {
+    let form = $('<form id="modalForm" action="save.php?entity=banner" method="post" onsubmit="event.preventDefault(); return postForm();" enctype="multipart/form-data"></form>');
+    $.post('attributeArray.php', {'entity': 'Banner'}, (data) => {
       this.populateForm(form, data);
       this.showModal('Novo Banner', form);
     });
   });
 
   $('#btnPost').on('click', (event) => {
-    let form = $('<form action="save.php?entity=post" method="post" enctype="multipart/form-data"></form>');
-    $.post('attributeArray.php', {'model': 'Post'}, (data) => {
+    let form = $('<form id="modalForm" action="save.php?entity=post" method="post" onsubmit="event.preventDefault(); return postForm();" enctype="multipart/form-data"></form>');
+    $.post('attributeArray.php', {'entity': 'Post'}, (data) => {
       this.populateForm(form, data);
       this.showModal('Novo Post', form);
     });
   });
 
   $('#btnPage').on('click', (event) => {
-    let form = $('<form action="save.php?entity=page" method="post" enctype="multipart/form-data"></form>');
-    $.post('attributeArray.php', {'model': 'Page'}, (data) => {
+    let form = $('<form id="modalForm" action="save.php?entity=page" method="post" onsubmit="event.preventDefault(); return postForm();" enctype="multipart/form-data"></form>');
+    $.post('attributeArray.php', {'entity': 'Page'}, (data) => {
       this.populateForm(form, data);
       this.showModal('Nova Página', form);
     });
@@ -175,13 +175,16 @@ $(() => {
     let trashClone = $(trash).clone(true);
 
     $(editClone).on('click', (event) => {
+      $('#generic-modal').bind('shown.bs.modal', (event) => {
+        $("#generic-modal-title").html("Editar banner");
+        $('#generic-modal input[name="id"]').val($(element).data('id'));
+        let bannerImg = $('<img src="' + $(element).find('img').attr('src') + '" />');
+        $('#generic-modal input[name="image"]').attr('required', false).before(bannerImg);
+        $('#generic-modal input[name="link"]').val($(element).data('link'));
+        $('#generic-modal input[name="sequence"]').val($(element).data('sequence'));
+      });
+      
       $('#btnBanner').trigger('click');
-      $("#generic-modal-title").html("Editar banner");
-      $('#generic-modal input[name="id"]').val($(element).data('id'));
-      let bannerImg = $('<img src="' + $(element).find('img').attr('src') + '" />');
-      $('#generic-modal input[name="image"]').before(bannerImg);
-      $('#generic-modal input[name="link"]').val($(element).data('link'));
-      $('#generic-modal input[name="sequence"]').val($(element).data('sequence'));
     });
 
     $(element).append(editClone);
@@ -241,8 +244,8 @@ $(() => {
     let editClone = $(edit).clone();
 
     $(editClone).on('click', (event) => {
-      let form = $('<form action="save.php?entity=dynamicBlock" method="post"></form>');
-      $.post('attributeArray.php', 'DynamicBlock', (data) => {
+      let form = $('<form id="modalForm" action="save.php?entity=dynamicBlock" method="post" onsubmit="event.preventDefault(); return postForm();"></form>');
+      $.post('attributeArray.php', {'entity': 'DynamicBlock'}, (data) => {
         this.populateForm(form, data);
         this.showModal('Nova Página', form);
       });

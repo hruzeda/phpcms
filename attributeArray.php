@@ -1,7 +1,7 @@
 <?php
 /**
  * PHP Version 7.3.1
- * Model attribute API
+ * Entity attribute API
  *
  * @category Script
  * @package  None
@@ -15,9 +15,9 @@ require_once 'const.php';
 if (LOGGED_USER == null) {
     die('1');
 } elseif ($_POST) {
-    $model = $_POST['model'];
+    $entity = $_POST['entity'];
 
-    switch ($model) {
+    switch ($entity) {
         case 'Banner':
             require_once ROOT . "php/Banner.php";
             die(app\Banner::getAttributeArray());

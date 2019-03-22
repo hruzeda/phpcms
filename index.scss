@@ -6,22 +6,25 @@
   }
 }
 
-.blog-post {
-  position: relative;
-  padding: 1rem;
-}
+.blog-main {
+  margin-top: 1rem;
+  .blog-post {
+    position: relative;
+    padding: 1rem;
+  }
 
-.blog-post-title {
-  margin: 0 0 1rem 0;
-  font-size: 2.2rem;
-}
+  .blog-post-title {
+    margin: 0 0 1rem 0;
+    font-size: 2.2rem;
+  }
 
-.blog-post-body {
-  text-align: justify;
-  position: relative;
-  line-height: 1.2em;
-  max-height: 10.8em;
-  overflow: hidden;
+  .blog-post-body {
+    text-align: justify;
+    position: relative;
+    line-height: 1.2em;
+    max-height: 10.8em;
+    overflow: hidden;
+  }
 }
 
 .dynamic-block {

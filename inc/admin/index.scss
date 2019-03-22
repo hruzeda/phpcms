@@ -24,13 +24,23 @@
   z-index: 102;
   top: 0;
   right: 0;
-  &:nth-of-type(2) {
+  &:nth-of-type(odd) {
     transform: translateX(-120%);
+  }
+  &:last-of-type {
+    transform: none;
   }
 }
 
 .carousel-item .btn-admin {
-  left: 50%;
+  left: 0;
+  right: auto;
+  &:nth-of-type(odd) {
+    transform: none;
+  }
+  &:nth-of-type(2) {
+    transform: translateX(120%);
+  }
 }
 
 #generic-modal {

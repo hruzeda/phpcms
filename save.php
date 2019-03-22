@@ -50,7 +50,10 @@ if (LOGGED_USER === null) {
             require_once ROOT . "php/DynamicBlock.php";
 
             $id = intval($_POST['id']);
-            $page = intval($_POST['page']);
+            $page = "null";
+            if(isset($_POST['page'])) {
+                $page = intval($_POST['page']);
+            }
             $content = htmlentities($_POST['content'], ENT_QUOTES);
 
             if ($id > 0) {

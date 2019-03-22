@@ -11,6 +11,8 @@
  */
 
 namespace app;
+require_once ROOT . "php/App.php";
+require_once ROOT . "php/Page.php";
 
 class DynamicBlock
 {
