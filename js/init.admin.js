@@ -47,7 +47,7 @@ this.addSelect = function addSelect(form, name, options, placeholder, required) 
   }
 
   $.each(options, function(index, page) {
-    option = $('option value=""></option>');
+    option = $('<option></option>');
     $(option).attr('value', page.id);
     $(option).html(page.title);
     $(field).append(option);
@@ -77,14 +77,13 @@ this.addHiddenInput = function addHiddenInput(form, name, value) {
 };
 
 this.postForm = function postForm(form) {
-  debugger;
-  $.post($("#modalForm").attr('action'), $('#modalForm').serialize(), (data) => {
+  $("#modalForm").removeAttr('onsubmit').ajaxForm((data) => {
     if (parseInt(data, 10) === 1) {
       window.location.reload();
     } else {
       this.alert('Erro', 'danger', data);
     }
-  });
+  }).submit();
 };
 
 this.addSubmitInput = function addSubmitInput(form) {
@@ -170,12 +169,13 @@ $(() => {
   $(edit).append(editIcon);
 
   // EXISTING BANNERS
-  $('.carousel-item').each((index, element) => {
+  $('.slide').each((index, element) => {
     let editClone = $(edit).clone();
     let trashClone = $(trash).clone(true);
 
     $(editClone).on('click', (event) => {
-      $('#generic-modal').bind('shown.bs.modal', (event) => {
+      $('#generic-modal').bind('shown.bs.modal', function populateData(event) {
+        $('#generic-modal').unbind('shown.bs.modal', populateData);
         $("#generic-modal-title").html("Editar banner");
         $('#generic-modal input[name="id"]').val($(element).data('id'));
         let bannerImg = $('<img src="' + $(element).find('img').attr('src') + '" />');
@@ -197,7 +197,8 @@ $(() => {
     let trashClone = $(trash).clone(true);
 
     $(editClone).on('click', (event) => {
-      $('#generic-modal').bind('shown.bs.modal', (event) => {
+      $('#generic-modal').bind('shown.bs.modal', function populateData(event) {
+        $('#generic-modal').unbind('shown.bs.modal', populateData);
         $("#generic-modal-title").html("Editar post");
         $('#generic-modal input[name="id"]').val($(element).data('id'));
         let postImg = $('<img src="' + $(element).find('img').attr('src') + '" />');
@@ -221,7 +222,8 @@ $(() => {
     let trashClone = $(trash).clone(true);
 
     $(editClone).on('click', (event) => {
-      $('#generic-modal').bind('shown.bs.modal', (event) => {
+      $('#generic-modal').bind('shown.bs.modal', function populateData(event) {
+        $('#generic-modal').unbind('shown.bs.modal', populateData);
         $("#generic-modal-title").html("Editar post");
         $('#generic-modal input[name="id"]').val($(element).data('id'));
         let postImg = $('<img src="' + $(element).find('img').attr('src') + '" />');
@@ -250,7 +252,8 @@ $(() => {
         this.showModal('Nova Página', form);
       });
 
-      $('#generic-modal').bind('shown.bs.modal', (event) => {
+      $('#generic-modal').bind('shown.bs.modal', function populateData(event) {
+        $('#generic-modal').unbind('shown.bs.modal', populateData);
         $('#generic-modal input[name="id"]').val($(element).data('id'));
         $('#generic-modal select[name="page"]').val($(element).data('page'));
         $("#generic-modal .ql-editor").html($(element).data('content'));

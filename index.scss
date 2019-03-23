@@ -1,13 +1,18 @@
-#banner {
+#slider {
   z-index: 101;
+  max-height: 32rem;
 
-  .carousel-indicators {
-    z-index: 102;
+  .slick-slide, .slick-slide *{ outline: none !important; }
+
+  img {
+    opacity: 0;
+    margin: 0 auto;
   }
 }
 
 .blog-main {
   margin-top: 1rem;
+
   .blog-post {
     position: relative;
     padding: 1rem;

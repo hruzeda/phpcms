@@ -22,13 +22,12 @@ require_once ROOT . "php/Page.php";
 require_once ROOT . "php/DynamicBlock.php";
 require_once ROOT . 'inc/top.php'; ?>
 
-<!-- ADD THE NEW BANNER PLUGIN -->
-<div id="banner" class="w-100">
+<div id="slider" class="w-100">
     <?php $banners = app\Banner::loadAll($mysql, 'sequence ASC', 0, 5);
 
     $i = 0;
     foreach ($banners as $banner) { ?>
-      <div class="carousel-item <?= $i == 0 ? 'active' : ''; ?>"
+      <div class="slide <?= $i == 0 ? 'active' : ''; ?>"
         data-id="<?= $banner->getId(); ?>"
         data-type="banner"
         data-image="<?= $banner->getImage(); ?>"

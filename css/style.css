@@ -14190,14 +14190,14 @@ readers do not read off random characters that represent icons */
   transform: none;
 }
 
-.carousel-item .btn-admin {
+.slide .btn-admin {
   left: 0;
   right: auto;
 }
-.carousel-item .btn-admin:nth-of-type(odd) {
+.slide .btn-admin:nth-of-type(odd) {
   transform: none;
 }
-.carousel-item .btn-admin:nth-of-type(2) {
+.slide .btn-admin:nth-of-type(2) {
   transform: translateX(120%);
 }
 
@@ -14248,11 +14248,16 @@ readers do not read off random characters that represent icons */
   cursor: pointer;
 }
 
-#banner {
+#slider {
   z-index: 101;
+  max-height: 32rem;
 }
-#banner .carousel-indicators {
-  z-index: 102;
+#slider .slick-slide, #slider .slick-slide * {
+  outline: none !important;
+}
+#slider img {
+  opacity: 0;
+  margin: 0 auto;
 }
 
 .blog-main {

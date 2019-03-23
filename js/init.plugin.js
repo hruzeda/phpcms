@@ -1,15 +1,20 @@
 /* eslint-env browser, jquery */
 $(() => {
   // SLICK CARROUSEL
-  $('#banner').slick({
+  const slider = $('#slider');
+  $('#slider img').each((index, element) => {
+    $(element).height(slider.height());
+    if($(element).width() > slider.width())
+      $(element).width(slider.width());
+    $(element).animate({opacity: 1});
+  });
+  slider.slick({
     autoplay: true,
     autoplaySpeed: 3000,
-    dots: false,
+    dots: true,
     arrows: false,
-    infinite: true,
     speed: 500,
-    slidesToShow: 1,
-    adaptiveHeight: true,
+    slidesToShow: 1
   });
 
   // CONTACT FORM
