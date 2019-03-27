@@ -23,31 +23,37 @@ require_once ROOT . "php/DynamicBlock.php";
 require_once ROOT . 'inc/top.php'; ?>
 
 <div id="slider" class="w-100">
-    <?php $banners = app\Banner::loadAll($mysql, 'sequence ASC', 0, 5);
+  <?php $banners = app\Banner::loadAll($mysql, 'sequence ASC', 0, 5);
 
-    $i = 0;
-    foreach ($banners as $banner) { ?>
-      <div class="slide <?= $i == 0 ? 'active' : ''; ?>"
-        data-id="<?= $banner->getId(); ?>"
-        data-type="banner"
-        data-image="<?= $banner->getImage(); ?>"
-        data-link="<?= $banner->getLink(); ?>"
-        data-sequence="<?= $banner->getSequence(); ?>">
-        <?php if(strlen($banner->getLink()) > 0) { ?>
-          <a href="<?= $banner->getLink(); ?>">
-        <?php } ?>
-        <img class="d-block" src="<?= $banner->getImage(); ?>" />
-        <?php if(strlen($banner->getLink()) > 0) { ?>
-          </a>
-        <?php } ?>
-      </div>
+  $i = 0;
+  foreach ($banners as $banner) { ?>
+    <div class="slide <?= $i == 0 ? 'active' : ''; ?>"
+      data-id="<?= $banner->getId(); ?>"
+      data-type="banner"
+      data-image="<?= $banner->getImage(); ?>"
+      data-link="<?= $banner->getLink(); ?>"
+      data-sequence="<?= $banner->getSequence(); ?>">
+      <?php if(strlen($banner->getLink()) > 0) { ?>
+        <a href="<?= $banner->getLink(); ?>">
+      <?php } ?>
+      <img class="d-block" src="<?= $banner->getImage(); ?>" />
+      <?php if(strlen($banner->getLink()) > 0) { ?>
+        </a>
+      <?php } ?>
+    </div>
     <?php $i++;
-    } ?>
+  } ?>
 </div>
 
 <div class="row">
   <div class="col-md-8 blog-main">
-    <?php $posts = app\Post::loadAll($mysql, 'created DESC', 0, 5);
+    <?php $pageSize = 5;
+    if($_GET && isset($_GET['page']))
+      $page = intval($_GET['page']);
+    else
+      $page = 0;
+
+    $posts = app\Post::loadAll($mysql, 'created DESC', $page, $pageSize);
     foreach ($posts as $post) { ?>
       <div class="blog-post post"
         data-id="<?= $post->getId(); ?>"
@@ -64,6 +70,18 @@ require_once ROOT . 'inc/top.php'; ?>
         </div>
       </div>
     <?php } ?>
+
+    <div class="pages bg-light">
+      <?php $amount = app\Post::getTotalAmount($mysql);
+      $pages = $amount / $pageSize;
+      for($i = 0; $i < $pages; $i++) {
+        if($i == $page){ ?>
+          <button type="button" class="btn btn-primary" disabled><?= $i+1; ?></button>
+        <?php } else { ?>
+          <button type="button" class="btn btn-primary" onclick="location.href='index.php?page=<?= $i; ?>';"><?= $i+1; ?></button>
+        <?php }
+      } ?>
+    </div>
   </div><!-- /.blog-main -->
 
 <?php require_once 'inc/foot.php'; ?>

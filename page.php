@@ -42,9 +42,9 @@ require_once ROOT . 'inc/top.php'; ?>
         <p class="blog-post-body"><?= $page->getHTMLContent(); ?></p>
       </div>
 
-      <div class="fb-comments"
+      <!--<div class="fb-comments"
          data-href="http://phpcms.com.br/page.php?id=<?= $page->getId(); ?>"
-         data-width="100%" data-numposts="5"></div>
+         data-width="100%" data-numposts="5"></div>-->
   </div><!-- /.blog-main -->
 
 <?php require_once 'inc/foot.php'; ?>

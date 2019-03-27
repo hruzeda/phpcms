@@ -90,6 +90,17 @@ class Post
         return $list;
     }
 
+    public static function getTotalAmount($mysql)
+    {
+        $amount = 0;
+        $result = $mysql->query("SELECT count(id) 'amount' FROM post");
+        if ($result->num_rows === 1) {
+            $result->data_seek(0);
+            $amount = intval($result->fetch_assoc()['amount']);
+        }
+        return $amount;
+    }
+
     /**
      * @return array of types
      */
@@ -211,7 +222,9 @@ class Post
     public function getExcerpt()
     {
         if ($this->content != null) {
-            return strip_tags($this->getHTMLContent(), '<br><strong><b><u><i>');
+            $result = preg_replace("~</h1>|</h2>|</h3>|</h4>|</p>~", "<br/>", $this->getHTMLContent(), -1);
+            //$result = str_replace("</p>", "<br/>", $result);
+            return strip_tags($result, '<br><strong><b><u><i>');
         }
     }
 
@@ -244,6 +257,6 @@ class Post
      */
     public function getCreatedDate()
     {
-        return ucwords(utf8_encode(strftime('%A, %e de %B de %Y', strtotime($this->created))));
+        return ucwords(/*utf8_encode(*/strftime('%A, %e de %B de %Y', strtotime($this->created)))/*)*/;
     }
 }

@@ -262,6 +262,6 @@ class Page
      */
     public function getCreatedDate()
     {
-        return ucwords(utf8_encode(strftime('%A, %e de %B de %Y', strtotime($this->created))));
+        return ucwords(/*utf8_encode(*/strftime('%A, %e de %B de %Y', strtotime($this->created)))/*)*/;
     }
 }
