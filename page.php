@@ -37,7 +37,7 @@ require_once ROOT . 'inc/top.php'; ?>
           data-title="<?= $page->getTitle(); ?>"
           data-content="<?= strip_tags($page->getContent()); ?>">
         <h1 class="blog-post-title mb-1"><?= $page->getTitle(); ?></h1>
-        <!--<p class="small font-italic text-muted"><?= $page->getCreatedDate(); ?></p>-->
+        <!--<p class="small font-italic text-muted"><?= $page->getUpdatedDate(); ?></p>-->
         <p class="text-center"><img width="100%" src="<?= $page->getImage(); ?>"/></p>
         <p class="blog-post-body"><?= $page->getHTMLContent(); ?></p>
       </div>

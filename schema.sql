@@ -35,7 +35,6 @@ CREATE TABLE `page` (
   `thumb` varchar(255) NOT NULL,
   `title` varchar(1000) NOT NULL,
   `content` mediumtext NOT NULL,
-  `created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
@@ -45,7 +44,6 @@ CREATE TABLE `post` (
   `thumb` varchar(255) NOT NULL,
   `title` varchar(1000) NOT NULL,
   `content` mediumtext NOT NULL,
-  `created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 

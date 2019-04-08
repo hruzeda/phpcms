@@ -2,19 +2,21 @@
 $(() => {
   // SLICK CARROUSEL
   const slider = $('#slider');
-  $('#slider img').each((index, element) => {
-    $(element).height(slider.height());
-    if($(element).width() > slider.width())
-      $(element).width(slider.width());
-    $(element).animate({opacity: 1});
-  });
   slider.slick({
     autoplay: true,
     autoplaySpeed: 3000,
     dots: true,
     arrows: false,
-    speed: 500,
-    slidesToShow: 1
+    speed: 800,
+    slidesToShow: 1,
+    adaptiveHeight: true
+  });
+
+  $('#slider img').each((index, element) => {
+    if($(element).height() > slider.height()) {
+      $(element).height(slider.height());
+    }
+    $(element).animate({opacity: 1});
   });
 
   // CONTACT FORM

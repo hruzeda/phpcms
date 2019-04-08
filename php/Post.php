@@ -19,7 +19,6 @@ class Post
     private $thumb;
     private $title;
     private $content;
-    private $created;
     private $updated;
 
     /**
@@ -36,7 +35,6 @@ class Post
         $this->thumb = $thumb;
         $this->title = $title;
         $this->content = $content;
-        $this->created = null;
         $this->updated = null;
     }
 
@@ -47,14 +45,13 @@ class Post
      */
     public static function load($mysql, $id)
     {
-        $result = $mysql->query("SELECT image, thumb, title, content,  created, updated FROM post WHERE id = {$id} LIMIT 1");
+        $result = $mysql->query("SELECT image, thumb, title, content,  updated FROM post WHERE id = {$id} LIMIT 1");
         if ($result->num_rows === 1) {
             $result->data_seek(0);
             $result = $result->fetch_assoc();
 
             $post = new Post($result['image'], $result['thumb'], $result['title'], $result['content']);
             $post->id = $id;
-            $post->created = $result['created'];
             $post->updated = $result['updated'];
             return $post;
         } else {
@@ -74,14 +71,13 @@ class Post
         $page *= $pageSize;
         $list = array();
 
-        $result = $mysql->query("SELECT id, image, thumb, title, content, created, updated FROM post " .
+        $result = $mysql->query("SELECT id, image, thumb, title, content, updated FROM post " .
             "ORDER BY {$order} LIMIT {$page}, {$pageSize}");
         if ($result->num_rows > 0) {
             $result->data_seek(0);
             while ($pResult = $result->fetch_assoc()) {
                 $post = new Post($pResult['image'], $pResult['thumb'], $pResult['title'], $pResult['content']);
                 $post->id = $pResult['id'];
-                $post->created = $pResult['created'];
                 $post->updated = $pResult['updated'];
                 array_push($list, $post);
             }
@@ -255,8 +251,8 @@ class Post
     /**
      * @return string
      */
-    public function getCreatedDate()
+    public function getUpdatedDate()
     {
-        return ucwords(/*utf8_encode(*/strftime('%A, %e de %B de %Y', strtotime($this->created)))/*)*/;
+        return ucwords(/*utf8_encode(*/strftime('%A, %e de %B de %Y', strtotime($this->updated)))/*)*/;
     }
 }

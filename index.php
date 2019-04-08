@@ -53,7 +53,7 @@ require_once ROOT . 'inc/top.php'; ?>
     else
       $page = 0;
 
-    $posts = app\Post::loadAll($mysql, 'created DESC', $page, $pageSize);
+    $posts = app\Post::loadAll($mysql, 'updated DESC', $page, $pageSize);
     foreach ($posts as $post) { ?>
       <div class="blog-post post"
         data-id="<?= $post->getId(); ?>"

@@ -14,9 +14,8 @@
 <head>
   <meta charset="UTF-8">
 
-  <meta name="description" content="Centro Cultural localizado na cidade de Campinas cuja missão é
-    apoiar na formação dos estudantes universitários e de ensino médio.">
-  <meta name="keywords" content="Centro Castelo, Centro Cultural">
+  <meta name="description" content="">
+  <meta name="keywords" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <meta property="og:title" content="PHP CMS"/>
@@ -59,11 +58,11 @@
 <div class="container">
   <header class="blog-header py-3">
         <?php
-        require_once ROOT . 'inc/alert.php';
-        require_once ROOT . 'inc/modal.php';
+        require_once ROOT . 'inc/admin/alert.php';
         require_once ROOT . 'inc/admin/loginForm.php';
 
         if (LOGGED_USER != null) {
+            require_once ROOT . 'inc/admin/modal.php';
             require_once ROOT . 'inc/admin/index.php';
         } ?>
 
@@ -95,7 +94,7 @@
       <a class="py-2 px-3 mx-1 active" href="index.php">Home</a>
 
         <?php $mysql = app\App::getConnection();
-        $pages = app\Page::loadAll($mysql, 'created DESC', 0, 20);
+        $pages = app\Page::loadAll($mysql, 'updated DESC', 0, 20);
         foreach ($pages as $page) { ?>
       <a class="py-2 px-3 mx-1 active" href="page/<?= $page->getId(); ?>"><?= $page->getTitle(); ?></a>
         <?php } ?>
