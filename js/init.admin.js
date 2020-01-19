@@ -155,7 +155,7 @@ $(() => {
         entity: $(element).data('type'),
       }, (data) => {
         if (parseInt(data, 10) === 1) {
-          window.location.reload();
+          window.location = '/';
         } else {
           this.alert('Erro', 'danger', data);
         }

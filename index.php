@@ -10,9 +10,9 @@
  * @link     http://phpcms.com.br
  */
 session_start();
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
+//ini_set('display_errors', 1);
+//ini_set('display_startup_errors', 1);
+//error_reporting(E_ALL);
 require_once 'const.php';
 require_once ROOT . 'vendor/autoload.php';
 require_once ROOT . "php/App.php";
@@ -47,20 +47,22 @@ require_once ROOT . 'inc/top.php'; ?>
 
 <div class="row">
   <div class="col-md-8 blog-main">
-    <?php $pageSize = 5;
-    if($_GET && isset($_GET['page']))
-      $page = intval($_GET['page']);
+    <?php $paginationSize = 5;
+    if($_GET && isset($_GET['p']))
+      $p = intval($_GET['p']);
     else
-      $page = 0;
+      $p = 0;
 
-    $posts = app\Post::loadAll($mysql, 'updated DESC', $page, $pageSize);
+    $posts = app\Post::loadAll($mysql, 'updated DESC', $p, $paginationSize);
     foreach ($posts as $post) { ?>
       <div class="blog-post post"
         data-id="<?= $post->getId(); ?>"
         data-type="post"
         data-title="<?= $post->getTitle(); ?>"
         data-content="<?= $post->getContent(); ?>">
-        <h2 class="blog-post-title"><?= $post->getTitle(); ?></h2>
+        <a class="text-dark" href="post/<?= $post->getId(); ?>">
+          <h2 class="blog-post-title"><?= $post->getTitle(); ?></h2>
+        </a>
         <div class="row">
           <p class="col-md-4 text-justify"><img width="100%" src="<?= $post->getThumb(); ?>"/></p>
           <div class="col">
@@ -71,14 +73,14 @@ require_once ROOT . 'inc/top.php'; ?>
       </div>
     <?php } ?>
 
-    <div class="pages bg-light">
+    <div class="blog-pagination bg-light">
       <?php $amount = app\Post::getTotalAmount($mysql);
-      $pages = $amount / $pageSize;
-      for($i = 0; $i < $pages; $i++) {
-        if($i == $page){ ?>
+      $pagination = $amount / $paginationSize;
+      for($i = 0; $i < $pagination; $i++) {
+        if($i == $p){ ?>
           <button type="button" class="btn btn-primary" disabled><?= $i+1; ?></button>
         <?php } else { ?>
-          <button type="button" class="btn btn-primary" onclick="location.href='index.php?page=<?= $i; ?>';"><?= $i+1; ?></button>
+          <button type="button" class="btn btn-primary" onclick="location.href='index.php?p=<?= $i; ?>';"><?= $i+1; ?></button>
         <?php }
       } ?>
     </div>

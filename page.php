@@ -32,6 +32,7 @@ require_once ROOT . 'inc/top.php'; ?>
       $page = app\Page::load($mysql, $id); ?>
       <div class="blog-post page"
           data-id="<?= $page->getId(); ?>"
+          data-type="page"
           data-image="<?= $page->getImage(); ?>"
           data-thumb="<?= $page->getThumb(); ?>"
           data-title="<?= $page->getTitle(); ?>"
